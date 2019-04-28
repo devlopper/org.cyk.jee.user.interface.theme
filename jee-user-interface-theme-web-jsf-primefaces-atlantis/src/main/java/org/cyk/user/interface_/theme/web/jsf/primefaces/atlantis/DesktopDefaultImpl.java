@@ -34,7 +34,6 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		Object request = getRequest();
 		
 		__addTagLinkStyleSheet__("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
-		__addTagLinkResource__("icon", "image/png", request, "icon.png","image", "32x32");
 		
 		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "fr_FR.js","js"));
 		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "nanoscroller.js","js"));
