@@ -22,4 +22,14 @@
 		</dependency>
 	</dependencies>
 	
+	<profiles>
+		<profile>
+			<id>ivorycoast.orange</id>
+			<properties>
+				<cyk.web.context.parameter.theme.primefaces>atlantis-orange</cyk.web.context.parameter.theme.primefaces>
+				<cyk.web.context.parameter.theme.favicon.file.name.prefix>ivorycoast</cyk.web.context.parameter.theme.favicon.file.name.prefix>
+			</properties>
+		</profile>
+	</profiles>
+	
 </project>

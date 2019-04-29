@@ -7,30 +7,28 @@
 	<display-name>user interface theme</display-name>
 	
 	<context-param>
-		<description>The theme class</description>
-		<param-name>cyk.user.interface.theme.class.name</param-name>
-		<param-value>${web.context.parameter.theme.class.value}</param-value>
+		<param-name>cyk.web.context.parameter.theme.class.name</param-name>
+		<param-value>${cyk.web.context.parameter.theme.class.name}</param-value>
 	</context-param>
 	
 	<context-param>
-		<description>The theme identifier</description>
-		<param-name>${web.context.parameter.theme.identifier.name}</param-name>
-		<param-value>${web.context.parameter.theme.identifier.value}</param-value>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>${cyk.web.context.parameter.theme.primefaces}</param-value>
 	</context-param>
 	
 	<context-param>
-		<param-name>web.context.parameter.theme.favicon.file.folder</param-name>
-		<param-value>${web.context.parameter.theme.favicon.file.folder}</param-value>
+		<param-name>cyk.web.context.parameter.theme.favicon.file.folder</param-name>
+		<param-value>${cyk.web.context.parameter.theme.favicon.file.folder}</param-value>
 	</context-param>
 	
 	<context-param>
-		<param-name>web.context.parameter.theme.favicon.file.name.prefix</param-name>
-		<param-value>${web.context.parameter.theme.favicon.file.name.prefix}</param-value>
+		<param-name>cyk.web.context.parameter.theme.favicon.file.name.prefix</param-name>
+		<param-value>${cyk.web.context.parameter.theme.favicon.file.name.prefix}</param-value>
 	</context-param>
 	
 	<context-param>
-		<param-name>web.context.parameter.theme.favicon.file.name.extension</param-name>
-		<param-value>${web.context.parameter.theme.favicon.file.name.extension}</param-value>
+		<param-name>cyk.web.context.parameter.theme.favicon.file.name.extension</param-name>
+		<param-value>${cyk.web.context.parameter.theme.favicon.file.name.extension}</param-value>
 	</context-param>
 		
 </web-app>

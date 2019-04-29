@@ -2,12 +2,8 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis;
 
 import java.io.Serializable;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-
 import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.properties.Properties;
-import org.cyk.utility.client.controller.component.file.File;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
 import org.cyk.utility.client.controller.component.menu.MenuItem;
@@ -35,25 +31,13 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		
 		__addTagLinkStyleSheet__("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 		
-		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "fr_FR.js","js"));
-		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "nanoscroller.js","js"));
-		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "layout.js","js"));
-		getTagScripts(Boolean.TRUE).addBySrc(__getResourceRelativeUrl__(request, "common.js","js"));
+		__addTagScriptResource__(request, "fr_FR.js","js");
+		__addTagScriptResource__(request, "nanoscroller.js","js");
+		__addTagScriptResource__(request, "layout.js","js");
+		__addTagScriptResource__(request, "common.js","js");
 		
-		File file = __inject__(File.class);
-		file.getProperties().setName("main.css");
-		file.getProperties().setLibrary("css");
-		file.getProperties().setContracts(__getIdentifier__());
-		addCascadeStyleSheetFiles(file);
-		
-		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-		String color = StringUtils.substringAfter(servletContext.getInitParameter("primefaces.THEME"), "atlantis-");
-	
-		file = __inject__(File.class);
-		file.getProperties().setName("colors/layout-"+color+".css");
-		file.getProperties().setLibrary("css");
-		file.getProperties().setContracts(__getIdentifier__());
-		addCascadeStyleSheetFiles(file);
+		__addTagLinkResourceStyleSheet__(request, "main.css","css");
+		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+StringUtils.substringAfter(getConfigurationParameterValue("primefaces.THEME", null), "atlantis-")+".css","css");
 		
 		Tag tag = __inject__(TagForm.class);
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
