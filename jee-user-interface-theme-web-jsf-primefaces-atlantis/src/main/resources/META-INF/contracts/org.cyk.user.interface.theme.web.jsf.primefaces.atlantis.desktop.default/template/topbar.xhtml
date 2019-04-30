@@ -9,9 +9,7 @@
     
     <div class="topbar" >
         <div class="logo">
-           <p:graphicImage 
-           		url="#{request.contextPath}/javax.faces.resource/#{__page__.window.theme.logo.properties.name}.jsf?ln=#{__page__.window.theme.logo.properties.library}&amp;con=#{__page__.window.theme.logo.properties.contracts}"
-           		style="width: 40px; margin-top: 4px" />
+           <cyk:image value="#{__page__.window.theme.logo}" style="width: 40px; margin-top: 4px" />
         </div>
         
         <div style="position: absolute; left: 60px; top: 8px; z-index: 1;">

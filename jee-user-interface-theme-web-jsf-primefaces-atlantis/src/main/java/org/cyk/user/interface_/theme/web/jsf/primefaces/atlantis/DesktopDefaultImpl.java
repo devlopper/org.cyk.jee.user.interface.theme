@@ -37,7 +37,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		__addTagScriptResource__(request, "common.js","js");
 		
 		__addTagLinkResourceStyleSheet__(request, "main.css","css");
-		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+StringUtils.substringAfter(getConfigurationParameterValue("primefaces.THEME", null), "atlantis-")+".css","css");
+		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+StringUtils.substringAfter(__getConfigurationParameterValue__("primefaces.THEME", null), "atlantis-")+".css","css");
 		
 		Tag tag = __inject__(TagForm.class);
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
