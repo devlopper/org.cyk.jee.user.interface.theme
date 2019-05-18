@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 
-import org.cyk.utility.__kernel__.function.FunctionRunnableMap;
-import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetterImpl;
+import org.cyk.utility.__kernel__.DependencyInjection;
+import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
 import org.cyk.utility.system.node.SystemNodeClient;
 
@@ -16,7 +16,7 @@ public class ServletContextListener extends AbstractServletContextListener imple
 
 	@Override
 	protected void __listenContextInitialized__(ServletContextEvent servletContextEvent) {
-		__inject__(FunctionRunnableMap.class).set(MenuBuilderMapGetterImpl.class, MenuBuilderMapGetterFunctionRunnableImpl.class,10000);
+		DependencyInjection.setQualifierClass(MenuBuilderMapGetter.class, CustomTheme.class);
 		__inject__(SystemNodeClient.class).setName("User Interface Theme");
 	}
 	
