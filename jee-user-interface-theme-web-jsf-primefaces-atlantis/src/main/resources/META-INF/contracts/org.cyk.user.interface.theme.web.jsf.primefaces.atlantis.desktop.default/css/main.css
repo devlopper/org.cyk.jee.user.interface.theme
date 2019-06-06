@@ -775,25 +775,6 @@ body .ui-tabs.ui-tabs-top .ui-tabs-panel, body .ui-tabs.ui-tabs-bottom .ui-tabs-
     
 }
 
-.ui-autocomplete {
-	
-}
-
-.ui-autocomplete-multiple {
-	background: yellow;
-}
-/*
-.ui-autocomplete-multiple-container ul {
-	width: 100% !important;
-	border: 5px solid blue !important;
-}
-
-.ui-autocomplete-multiple-container li {
-	width: 100%;
-	background: red;
-}
-*/
-
 .ui-autocomplete-input {
 	width: 100%;
 }

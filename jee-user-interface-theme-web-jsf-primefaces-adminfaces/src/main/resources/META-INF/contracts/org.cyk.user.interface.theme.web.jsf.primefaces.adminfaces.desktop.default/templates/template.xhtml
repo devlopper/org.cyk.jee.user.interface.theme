@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:c="http://java.sun.com/jsp/jstl/core" 
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
                 template="/admin.xhtml"
                 xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
 
@@ -51,6 +53,33 @@
         <ui:include src="includes/controlsidebar-tabs-content.xhtml"/>
     </ui:define>
     -->
+    
+    <ui:define name="body">
+    	<cyk:form value="#{__page__.window.theme.tagMap.get('content.form')}">
+        	<ui:define name="formContent">
+            	<cyk:contractBodyWithThemeInsideFormTagBodyFirst/>
+             	<ui:insert name="center">
+					<ui:insert name="centerNorth">
+						<div class="ui-g-12">
+							<cyk:contractBodyMessages/>
+						</div>
+					</ui:insert>
+				
+					<ui:insert name="centerCenter">
+						<c:set var="viewCenter" value="#{__page__.window.theme.viewMap.get('center')}" />
+						<c:if test="#{viewCenter != null}">
+							<div class="ui-g-12">
+								<ui:insert name="centerView">
+									<cyk:view value="#{viewCenter}" />
+								</ui:insert>
+							</div>
+						</c:if>
+					</ui:insert>
+             	</ui:insert>
+             </ui:define>
+    	</cyk:form>		    
+    </ui:define>
+    
     <ui:define name="footer">
     	FOOTER
     </ui:define>

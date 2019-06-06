@@ -6,6 +6,9 @@ import org.cyk.utility.client.controller.component.menu.Menu;
 import org.cyk.utility.client.controller.component.menu.MenuRenderTypeColumnPanel;
 import org.cyk.utility.client.controller.component.theme.Theme;
 import org.cyk.utility.client.controller.component.window.Window;
+import org.cyk.utility.client.controller.tag.Tag;
+import org.cyk.utility.client.controller.tag.TagForm;
+import org.cyk.utility.client.controller.web.ComponentHelper;
 import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractThemeImpl;
 import org.cyk.utility.scope.ScopeSession;
 
@@ -21,6 +24,12 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		Theme theme = super.build();
 		Object request = getRequest();
 		__addTagLinkResource__("stylesheet", "text/css", request, "starter.css","css");
+		
+		Tag tag = __inject__(TagForm.class);
+		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
+		tag.getProperties().setEnctype("multipart/form-data");
+		mapTags("content.form",tag);
+		
 		return theme;
 	}
 	

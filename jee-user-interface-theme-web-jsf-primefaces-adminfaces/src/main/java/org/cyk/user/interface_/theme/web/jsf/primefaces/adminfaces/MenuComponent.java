@@ -41,17 +41,7 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 		writer.endElement("ul");
 	}
 
-	private void addLi(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{
-		/*
-		 * 
-		 * <li>
-            <p:link>
-                <i class="fa fa-car"></i>
-                <span>Cars</span>
-            </p:link>
-        </li>
-		 * 
-		 */
+	protected void addLi(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{
 		writer.startElement("li", this);
 		addLink(writer, iconClass, text, href, onClick);
 		writer.endElement("li");
@@ -59,7 +49,10 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 	
 	private void addLi(ResponseWriter writer,MenuItem item) throws IOException{
 		writer.startElement("li", this);
-		addLink(writer, (String) item.getCommandable().getProperties().getIcon(),item.getCommandable().getName(),null,null);
+		String url = null;
+		if(item.getCommandable().getNavigation()!=null && item.getCommandable().getNavigation().getUniformResourceLocator()!=null)
+			url = item.getCommandable().getNavigation().getUniformResourceLocator().toString();
+		addLink(writer, (String) item.getCommandable().getProperties().getIcon(),item.getCommandable().getName(),url,null);
 		if(Boolean.TRUE.equals(DependencyInjection.inject(CollectionHelper.class).isNotEmpty(item.getChildren()))) {
 			writer.startElement("ul", this);
 			for(Object index : item.getChildren()) {
