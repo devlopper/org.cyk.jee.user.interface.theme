@@ -27,8 +27,8 @@
 			<id>ivorycoast.orange</id>
 			<properties>
 				<cyk.context.parameter.theme.primefaces>atlantis-orange</cyk.context.parameter.theme.primefaces>
+				<cyk.context.parameter.theme.logo.file.name.prefix>ivorycoastLogo</cyk.context.parameter.theme.logo.file.name.prefix>
 				<cyk.context.parameter.theme.favicon.file.name.prefix>ivorycoast</cyk.context.parameter.theme.favicon.file.name.prefix>
-				<cyk.context.parameter.theme.logo.file.resources.folder>org.cyk.user.interface.theme.web.jsf.primefaces.desktop.default</cyk.context.parameter.theme.logo.file.resources.folder>
 			</properties>
 		</profile>
 	</profiles>

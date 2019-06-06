@@ -20,9 +20,12 @@ public class MenuBuilderMapGetterImpl extends AbstractMenuBuilderMapGetterImpl i
 	@Override
 	protected void ____executePrincipalIsNull____(MenuBuilder sessionMenuBuilder, Object request) throws Exception {
 		sessionMenuBuilder.addItems(
-				__inject__(MenuItemBuilder.class).setCommandableName("Layout").setCommandableOutputProperty(Properties.ICON, "fa fa-child")
+				__inject__(MenuItemBuilder.class).setCommandableName("Layout 01").setCommandableOutputProperty(Properties.ICON, "fa fa-child")
 					.addChild(__inject__(MenuItemBuilder.class).setCommandableName("Index")
 					,__inject__(MenuItemBuilder.class).setCommandableName("Table"))
+				,__inject__(MenuItemBuilder.class).setCommandableName("Layout 02").setCommandableOutputProperty(Properties.ICON, "fa fa-file")
+					.addChild(__inject__(MenuItemBuilder.class).setCommandableName("Index")
+							,__inject__(MenuItemBuilder.class).setCommandableName("Table"))	
 					);
 	}
 

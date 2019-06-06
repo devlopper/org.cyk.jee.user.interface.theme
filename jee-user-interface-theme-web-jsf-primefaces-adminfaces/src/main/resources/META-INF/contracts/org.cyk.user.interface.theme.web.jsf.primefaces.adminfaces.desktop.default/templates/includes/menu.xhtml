@@ -3,8 +3,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" 
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
-
+                xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org"
+                xmlns:theme="http://runtime.adminfaces.primefaces.jsf.web.theme.interface.user.cyk.org">
+	
+	<theme:menu value="#{__page__.window.theme.menu}"/>
+	
+	<!--
     <ul class="sidebar-menu tree" data-widget="tree">
         <li>
             <p:link outcome="/index" onclick="clearBreadCrumbs()">
@@ -18,14 +22,55 @@
         <li>
             <p:link>
                 <i class="fa fa-car"></i>
-                <span>Cars</span>
+                <span>Item 01</span>
             </p:link>
         </li>
+        <li>
+            <p:link>
+                <span>Item 02</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link>
+                <span>Item 03</span>
+            </p:link>
+        </li>
+        <li>
+            <ul class="tree" data-widget="tree">
+		        <li>
+		            <p:link>
+		                <i class="fa fa-car"></i>
+		                <span>Sub Item 01</span>
+		            </p:link>
+		        </li>
+		        <li>
+		            <ul class="tree" data-widget="tree">
+				        <li>
+				            <p:link>
+				                <i class="fa fa-car"></i>
+				                <span>Sub Sub Item 01</span>
+				            </p:link>
+				        </li>
+				        <li>
+				            <p:link>
+				                <span>Sub Sub Item 02</span>
+				            </p:link>
+				        </li>
+				        <li>
+				            <p:link>
+				                <span>Sub Sub Item 03</span>
+				            </p:link>
+				        </li>
+				    </ul>
+		        </li>
+		        <li>
+		            <p:link>
+		                <span>Sub Item 03</span>
+		            </p:link>
+		        </li>
+		    </ul>
+        </li>
     </ul>
+    -->
     
-    <h:form>
-    	<cyk:menu value="#{__page__.window.theme.menu}"/>
-    </h:form>
-    
-
 </ui:composition>
