@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMap;
+import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
 import org.cyk.utility.client.controller.component.menu.MenuItem;
 import org.cyk.utility.client.controller.component.menu.MenuItemBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuItemBuilders;
@@ -15,6 +16,7 @@ import org.cyk.utility.client.controller.component.theme.Theme;
 import org.cyk.utility.client.controller.component.window.Window;
 import org.cyk.utility.client.controller.session.SessionAttributeEnumeration;
 import org.cyk.utility.client.controller.session.SessionAttributeGetter;
+import org.cyk.utility.client.controller.session.SessionAttributeSetter;
 import org.cyk.utility.client.controller.tag.Tag;
 import org.cyk.utility.client.controller.tag.TagForm;
 import org.cyk.utility.client.controller.web.ComponentHelper;
@@ -50,8 +52,14 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag.setIdentifier("menu-form");
 		mapTags("menu.form",tag);
 		
+		MenuBuilderMap menuBuilderMap = __inject__(SessionAttributeGetter.class).setRequest(request).setAttribute(SessionAttributeEnumeration.MENU_BUILDER_MAP).execute().getOutputAs(MenuBuilderMap.class);
+		if(menuBuilderMap == null)
+			__inject__(SessionAttributeSetter.class).setRequest(request).setAttribute(SessionAttributeEnumeration.MENU_BUILDER_MAP)
+				.setValue(menuBuilderMap = __inject__(MenuBuilderMapGetter.class).setRequest(request).execute().getOutput())
+				.execute();
+					
 		//TODO reduce build time to maximum 1 second
-		MenuBuilder menuBuilder = __inject__(SessionAttributeGetter.class).setRequest(request).setAttribute(SessionAttributeEnumeration.MENU_BUILDER_MAP).execute().getOutputAs(MenuBuilderMap.class).get(ScopeSession.class);
+		MenuBuilder menuBuilder = menuBuilderMap.get(ScopeSession.class);
 		MenuItemBuilders oldMenuItemBuilders = menuBuilder.getItems();
 		for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
 			MenuItemBuilders items = null;

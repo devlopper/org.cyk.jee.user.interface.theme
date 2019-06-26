@@ -2,7 +2,7 @@ package org.cyk.user.interface_.theme.deployment;
 
 import java.io.Serializable;
 
-import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 
 import org.cyk.utility.__kernel__.DependencyInjection;
@@ -15,14 +15,10 @@ public class ServletContextListener extends AbstractServletContextListener imple
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void __listenContextInitialized__(ServletContextEvent servletContextEvent) {
+	public void __initialize__(ServletContext context) {
+		super.__initialize__(context);
 		DependencyInjection.setQualifierClass(MenuBuilderMapGetter.class, CustomTheme.class);
 		__inject__(SystemNodeClient.class).setName("User Interface Theme");
 	}
 	
-	@Override
-	protected void __listenContextDestroyed__(ServletContextEvent servletContextEvent) {
-		
-	}
-
 }
