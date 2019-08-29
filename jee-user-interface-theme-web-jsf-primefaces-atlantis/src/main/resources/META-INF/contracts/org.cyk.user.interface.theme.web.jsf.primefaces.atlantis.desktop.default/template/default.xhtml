@@ -28,21 +28,25 @@
 					<ui:define name="contractBodyWithThemeInsideFormTagBodySecond">
 						<div class="layout-wrapper">
 				            <ui:insert name="menuTop">
-				            	<ui:include src="topbar.xhtml" />
+				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'TOP_BAR' : __page__.sessionUser.identifier}">
+				            		<ui:include src="topbar.xhtml" />
+				            	</p:cache>
 				            </ui:insert>
 				            
 				            <ui:insert name="menuLeft">
-				            	<div class="layout-sidebar">
-			           				<pa:tabMenu>
-			                			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab" >
-						                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
-				                				<h:form id="menu-form">
-				                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
-							                	</h:form>
-							                </pa:tab>		
-						                </c:forEach>                
-			           				</pa:tabMenu>        
-			       				</div>
+				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'MENU_LEFT' : __page__.sessionUser.identifier}">
+					            	<div class="layout-sidebar">
+				           				<pa:tabMenu>
+				                			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab" >
+							                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
+					                				<h:form id="menu-form">
+					                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
+								                	</h:form>
+								                </pa:tab>		
+							                </c:forEach>                
+				           				</pa:tabMenu>        
+				       				</div>
+			       				</p:cache>
 				            </ui:insert>				            					            
 				            
 				            <div class="layout-main layout-main-reduce" id="contenu">
