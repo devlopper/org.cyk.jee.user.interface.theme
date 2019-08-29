@@ -61,25 +61,27 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		//TODO reduce build time to maximum 1 second
 		MenuBuilder menuBuilder = menuBuilderMap.get(ScopeSession.class);
 		MenuItemBuilders oldMenuItemBuilders = menuBuilder.getItems();
-		for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
-			MenuItemBuilders items = null;
-			if(index.getChildren()!=null) {
-				items = __inject__(MenuItemBuilders.class);
-				for(Object indexChild : index.getChildren())
-					if(indexChild instanceof MenuItemBuilder)
-						items.add((MenuItemBuilder)indexChild);
-				index.getChildren().clear();
+		if(oldMenuItemBuilders != null) {
+			for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
+				MenuItemBuilders items = null;
+				if(index.getChildren()!=null) {
+					items = __inject__(MenuItemBuilders.class);
+					for(Object indexChild : index.getChildren())
+						if(indexChild instanceof MenuItemBuilder)
+							items.add((MenuItemBuilder)indexChild);
+					index.getChildren().clear();
+				}
+				if(index.getRequest() == null)
+					index.setRequest(request);
+				MenuItem item = index.execute().getOutput();
+				
+				Tab tab = __inject__(Tab.class);
+				tab.setProperty(Properties.NAME, item.getCommandable().getName());
+				tab.setProperty(Properties.ICON, item.getCommandable().getProperties().getIcon());
+				if(items != null)
+					tab.setProperty(Properties.MENU,__inject__(MenuBuilder.class).setItems(items).setRequest(request).execute().getOutput());
+				getMenuTabs(Boolean.TRUE).add(tab);
 			}
-			if(index.getRequest() == null)
-				index.setRequest(request);
-			MenuItem item = index.execute().getOutput();
-			
-			Tab tab = __inject__(Tab.class);
-			tab.setProperty(Properties.NAME, item.getCommandable().getName());
-			tab.setProperty(Properties.ICON, item.getCommandable().getProperties().getIcon());
-			if(items != null)
-				tab.setProperty(Properties.MENU,__inject__(MenuBuilder.class).setItems(items).setRequest(request).execute().getOutput());
-			getMenuTabs(Boolean.TRUE).add(tab);
 		}
 		return theme;
 	}
