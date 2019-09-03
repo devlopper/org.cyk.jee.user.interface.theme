@@ -9,11 +9,15 @@
     
     <div class="topbar" >
         <div class="logo">
-           <cyk:image value="#{__page__.window.theme.logo}" style="width: 40px; margin-top: 4px" />
+        	<ui:insert name="topBarLogo">
+        		<cyk:image value="#{__page__.window.theme.logo}" style="width: 40px; margin-top: 4px" />
+        	</ui:insert>
         </div>
         
         <div style="position: absolute; left: 60px; top: 8px; z-index: 1;">
-            <cyk:outputText value="#{__page__.window.getOutputStringText('applicationName')}" />
+        	<ui:insert name="topBarApplicationName">
+        		<cyk:outputText value="#{__page__.window.getOutputStringText('applicationName')}" />	
+        	</ui:insert>            
         </div>
         
         <a id="topbar-menu-button" href="#">
