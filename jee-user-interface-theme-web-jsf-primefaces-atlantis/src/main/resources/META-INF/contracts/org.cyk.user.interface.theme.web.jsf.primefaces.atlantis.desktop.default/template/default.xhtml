@@ -61,6 +61,11 @@
 				            
 				            <div class="layout-main layout-main-reduce" id="contenu">
 				                <div class="layout-main-content">
+				                	<ui:insert name="__internalLog">
+				                		<ui:fragment rendered="#{__page__.__isInternalLoggable__}">
+				                			<h:outputText value="Page build duration : #{__page__.__windowBuildDuration__}" />
+				                		</ui:fragment>
+				                	</ui:insert>
 				                	<cyk:form value="#{__page__.window.theme.tagMap.get('content.form')}">
 				                		<ui:define name="formContent">
 					                		<cyk:contractBodyWithThemeInsideFormTagBodyFirst/>
