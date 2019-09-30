@@ -15,8 +15,7 @@ import org.cyk.utility.client.controller.component.tab.Tabs;
 import org.cyk.utility.client.controller.component.theme.Theme;
 import org.cyk.utility.client.controller.component.window.Window;
 import org.cyk.utility.client.controller.session.SessionAttributeEnumeration;
-import org.cyk.utility.client.controller.session.SessionAttributeGetter;
-import org.cyk.utility.client.controller.session.SessionAttributeSetter;
+import org.cyk.utility.client.controller.session.SessionHelper;
 import org.cyk.utility.client.controller.tag.Tag;
 import org.cyk.utility.client.controller.tag.TagForm;
 import org.cyk.utility.client.controller.web.ComponentHelper;
@@ -52,11 +51,10 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag.setIdentifier("menu-form");
 		mapTags("menu.form",tag);
 		
-		MenuBuilderMap menuBuilderMap = __inject__(SessionAttributeGetter.class).setRequest(request).setAttribute(SessionAttributeEnumeration.MENU_BUILDER_MAP).execute().getOutputAs(MenuBuilderMap.class);
+		MenuBuilderMap menuBuilderMap = (MenuBuilderMap) __inject__(SessionHelper.class).getAttributeValue(SessionAttributeEnumeration.MENU_BUILDER_MAP,request);
 		if(menuBuilderMap == null)
-			__inject__(SessionAttributeSetter.class).setRequest(request).setAttribute(SessionAttributeEnumeration.MENU_BUILDER_MAP)
-				.setValue(menuBuilderMap = __inject__(MenuBuilderMapGetter.class).setRequest(request).execute().getOutput())
-				.execute();
+			__inject__(SessionHelper.class).setAttributeValue(SessionAttributeEnumeration.MENU_BUILDER_MAP
+					,menuBuilderMap = __inject__(MenuBuilderMapGetter.class).setRequest(request).execute().getOutput(),request);
 					
 		//TODO reduce build time to maximum 1 second
 		MenuBuilder menuBuilder = menuBuilderMap.get(ScopeSession.class);

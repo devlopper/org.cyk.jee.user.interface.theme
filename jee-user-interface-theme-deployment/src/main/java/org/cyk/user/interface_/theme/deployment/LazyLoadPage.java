@@ -64,11 +64,11 @@ public class LazyLoadPage extends AbstractPageContainerManagedImpl implements Se
 		return viewBuilder;
 	}
 	
-	@Override
+	/*@Override
 	protected WindowBuilder __getWindowBuilder__() {
 		Boolean isViewLazyLoadable = !Boolean.TRUE.equals(__inject__(BooleanHelper.class).get(Faces.getRequestParameter("disabled")));
 		return super.__getWindowBuilder__().setIsViewLazyLoadable(isViewLazyLoadable);
-	}
+	}*/
 	
 	@Getter @Setter @Accessors(chain=true) @ToString
 	public static class Data extends AbstractDataImpl implements Serializable {
