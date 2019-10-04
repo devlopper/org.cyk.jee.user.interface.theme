@@ -8,10 +8,9 @@ import javax.faces.component.UIComponentBase;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import org.cyk.utility.__kernel__.DependencyInjection;
+import org.cyk.utility.__kernel__.collection.CollectionHelper;
+import org.cyk.utility.__kernel__.string.StringHelper;
 import org.cyk.utility.client.controller.component.menu.MenuItem;
-import org.cyk.utility.collection.CollectionHelper;
-import org.cyk.utility.string.StringHelper;
 
 @FacesComponent(createTag = true, tagName = "menu", namespace = "http://runtime.adminfaces.primefaces.jsf.web.theme.interface.user.cyk.org")
 public class MenuComponent extends UIComponentBase implements Serializable {
@@ -32,7 +31,7 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 		writer.writeAttribute("data-widget", "tree",null);
 		
 		//addLi(writer, "fa fa-home", "HOME", "/index.jsf", "clearBreadCrumbs();");
-		if(Boolean.TRUE.equals(DependencyInjection.inject(CollectionHelper.class).isNotEmpty(menu.getItems()))) {
+		if(CollectionHelper.isNotEmpty(menu.getItems())) {
 			for(MenuItem index : menu.getItems().get()) {
 				addLi(writer,index);
 			}
@@ -48,7 +47,7 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 	}
 	
 	private void addLi(ResponseWriter writer,MenuItem item) throws IOException{
-		writer.startElement("li", this);
+		/*writer.startElement("li", this);
 		String url = null;
 		if(item.getCommandable().getNavigation()!=null && item.getCommandable().getNavigation().getUniformResourceLocator()!=null)
 			url = item.getCommandable().getNavigation().getUniformResourceLocator().toString();
@@ -62,6 +61,7 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 			writer.endElement("ul");
 		}
 		writer.endElement("li");
+		*/
 	}
 	
 	private void addLink(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{
@@ -88,12 +88,12 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 	/**/
 	
 	private void writeAttributeIfValueNotBlank(ResponseWriter writer,String name,String value) throws IOException{
-		if(Boolean.TRUE.equals(DependencyInjection.inject(StringHelper.class).isNotBlank(value)))
+		if(StringHelper.isNotBlank(value))
 			writer.writeAttribute(name,value,null);
 	}
 
 	private void writeTextIfValueNotBlank(ResponseWriter writer,String text) throws IOException{
-		if(Boolean.TRUE.equals(DependencyInjection.inject(StringHelper.class).isNotBlank(text)))
+		if(StringHelper.isNotBlank(text))
 			writer.writeText(text,null);
 	}
 }

@@ -1,5 +1,6 @@
 <ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"  
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -33,30 +34,20 @@
                         </div>
                     </div>
                     <div class="profile-info">
-                        <span class="topbar-item-name profile-name">NAMES</span>
-                        <span class="topbar-item-name profile-role">ROLES </span>
+                        <span class="topbar-item-name profile-name">#{__page__.window.theme.names}</span>
+                        <span class="topbar-item-name profile-role">#{__page__.window.theme.roles}</span>
                     </div>
                 </a>
                 
                 <ul class="animated">
-                    <li role="menuitem">                        
-                        <a>
-                            <i class="fa fa-fw fa-key"/>
-                            <span>Connected User Account Options 1</span>
-                        </a>
-                    </li>
-         			
-         			<li role="menuitem">                        
-                        <a>
-                            <span>Connected User Account Options 2</span>
-                        </a>
-                    </li>
-         				
-                    <li role="menuitem">
-                    	<h:form>
-                    		<h:commandLink ><i class="fa fa-fw fa-sign-out"></i>Déconnexion</h:commandLink>
-                    	</h:form>                                                                       
-                    </li>
+                	<c:forEach items="#{__page__.window.theme.userMenuUlLis}" var="li">
+                		<li role="menuitem">                        
+	                        <a href="#{li[1]}">
+	                            <i class="#{li[2]}"/>
+	                            <span>#{li[0]}</span>
+	                        </a>
+	                    </li>
+                	</c:forEach>
                 </ul>
             </li>
             

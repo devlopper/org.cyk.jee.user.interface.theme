@@ -1,6 +1,8 @@
 package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.properties.Properties;
@@ -121,7 +123,9 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	
 	@Override
 	public Tabs getMenuTabs(Boolean injectIfNull) {
-		return (Tabs) __getInjectIfNull__(FIELD_MENU_TABS, injectIfNull);
+		if(menuTabs == null && Boolean.TRUE.equals(injectIfNull))
+			menuTabs = __inject__(Tabs.class);
+		return menuTabs;
 	}
 	
 	@Override
@@ -130,8 +134,33 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		return this;
 	}
 
+	public Collection<String[]> getUserMenuUlLis() {
+		return USER_MENU_UL_LIS;
+	}
+	
+	public String getNames() {
+		return "NOMS";
+	}
+	
+	public String getRoles() {
+		return "ROLES";
+	}
+	
 	/**/
 	
 	public static final String FIELD_MENU_TABS = "menuTabs";
 	
+	public static final Collection<String[]> USER_MENU_UL_LIS = new ArrayList<>();
+	public static void addUserMenuUlLi(String name,String url,String icon) {
+		USER_MENU_UL_LIS.add(new String[] {name,url,icon});
+	}
+	static {
+		addUserMenuUlLi("Me déconnecter", null,"fa fa-sign-out");
+		addUserMenuUlLi("Modifier mon mot de passe", null,"fa fa-key");
+		addUserMenuUlLi("Modifier mon profile", null,"fa fa-user");
+		addUserMenuUlLi("Mes préférences", null,"fa fa-cog");
+		addUserMenuUlLi("Mes visibilités", null,"fa fa-eye");
+		addUserMenuUlLi("Demandes de compte utilisateur", null,"fa fa-file-text");
+		addUserMenuUlLi("M'abonner à une publication", null,"fa fa-comments");
+	}
 }
