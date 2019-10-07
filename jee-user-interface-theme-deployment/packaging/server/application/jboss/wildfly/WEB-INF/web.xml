@@ -84,4 +84,23 @@
 		<param-value>${cyk.context.parameter.theme.logo.file.name.extension}</param-value>
 	</context-param>
 	-->	
+	<!-- Security -->
+	
+	<security-role>
+		<role-name>*</role-name>
+	</security-role>	
+	
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>KEYCLOAK</auth-method>
+	</login-config>
+	
 </web-app>

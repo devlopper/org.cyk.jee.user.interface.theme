@@ -13,12 +13,7 @@ public class MenuBuilderMapGetterImpl extends AbstractMenuBuilderMapGetterImpl i
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void ____executePrincipalIsNotNull____(MenuBuilder sessionMenuBuilder, Object request, Principal principal) throws Exception {
-		
-	}
-
-	@Override
-	protected void ____executePrincipalIsNull____(MenuBuilder sessionMenuBuilder, Object request) throws Exception {
+	protected void ____execute____(MenuBuilder sessionMenuBuilder, Object request, Principal principal) throws Exception {
 		sessionMenuBuilder.addItems(
 				__inject__(MenuItemBuilder.class).setCommandableName("Layout 01").setCommandableOutputProperty(Properties.ICON, "fa fa-child")
 					.addChild(__inject__(MenuItemBuilder.class).setCommandableName("Index")
@@ -27,6 +22,16 @@ public class MenuBuilderMapGetterImpl extends AbstractMenuBuilderMapGetterImpl i
 					.addChild(__inject__(MenuItemBuilder.class).setCommandableName("Index")
 							,__inject__(MenuItemBuilder.class).setCommandableName("Table"))	
 					);
+	}
+	
+	@Override
+	protected void ____executePrincipalIsNotNull____(MenuBuilder sessionMenuBuilder, Object request, Principal principal) throws Exception {
+		
+	}
+
+	@Override
+	protected void ____executePrincipalIsNull____(MenuBuilder sessionMenuBuilder, Object request) throws Exception {
+		
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
+import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMap;
@@ -138,10 +140,6 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		return USER_MENU_UL_LIS;
 	}
 	
-	public String getNames() {
-		return "NOMS";
-	}
-	
 	public String getRoles() {
 		return "ROLES";
 	}
@@ -155,7 +153,12 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		USER_MENU_UL_LIS.add(new String[] {name,url,icon});
 	}
 	static {
-		addUserMenuUlLi("Me déconnecter", null,"fa fa-sign-out");
+		UniformResourceIdentifierAsFunctionParameter parameter;
+		
+		parameter = new UniformResourceIdentifierAsFunctionParameter();
+		parameter.getPath(Boolean.TRUE).setIdentifier("logoutView");		
+		addUserMenuUlLi("Me déconnecter", UniformResourceIdentifierHelper.build(parameter),"fa fa-sign-out");
+		
 		addUserMenuUlLi("Modifier mon mot de passe", null,"fa fa-key");
 		addUserMenuUlLi("Modifier mon profile", null,"fa fa-user");
 		addUserMenuUlLi("Mes préférences", null,"fa fa-cog");
