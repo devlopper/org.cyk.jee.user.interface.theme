@@ -17,13 +17,11 @@ import org.cyk.utility.client.controller.component.annotation.InputString;
 import org.cyk.utility.client.controller.component.annotation.InputStringLineOne;
 import org.cyk.utility.client.controller.component.command.CommandableBuilder;
 import org.cyk.utility.client.controller.component.view.ViewBuilder;
-import org.cyk.utility.client.controller.component.window.WindowBuilder;
 import org.cyk.utility.client.controller.data.AbstractDataImpl;
 import org.cyk.utility.client.controller.data.AbstractFormDataImpl;
 import org.cyk.utility.client.controller.message.MessageRender;
 import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractPageContainerManagedImpl;
 import org.cyk.utility.notification.Notification;
-import org.cyk.utility.type.BooleanHelper;
 import org.omnifaces.util.Faces;
 
 import lombok.Getter;
@@ -63,12 +61,6 @@ public class LazyLoadPage extends AbstractPageContainerManagedImpl implements Se
 		});
 		return viewBuilder;
 	}
-	
-	/*@Override
-	protected WindowBuilder __getWindowBuilder__() {
-		Boolean isViewLazyLoadable = !Boolean.TRUE.equals(__inject__(BooleanHelper.class).get(Faces.getRequestParameter("disabled")));
-		return super.__getWindowBuilder__().setIsViewLazyLoadable(isViewLazyLoadable);
-	}*/
 	
 	@Getter @Setter @Accessors(chain=true) @ToString
 	public static class Data extends AbstractDataImpl implements Serializable {
