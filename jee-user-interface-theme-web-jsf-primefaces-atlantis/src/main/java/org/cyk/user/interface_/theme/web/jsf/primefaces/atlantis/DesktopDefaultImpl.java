@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
+import org.cyk.utility.__kernel__.configuration.VariableName;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
@@ -44,7 +46,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		__addTagScriptResource__(request, "common.js","js");
 		
 		__addTagLinkResourceStyleSheet__(request, "main.css","css");
-		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+StringUtils.substringAfter(__getConfigurationParameterValue__("primefaces.THEME", null), "atlantis-")+".css","css");
+		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+StringUtils.substringAfter(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_PRIMEFACES), "atlantis-")+".css","css");
 		
 		Tag tag = __inject__(TagForm.class);
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
