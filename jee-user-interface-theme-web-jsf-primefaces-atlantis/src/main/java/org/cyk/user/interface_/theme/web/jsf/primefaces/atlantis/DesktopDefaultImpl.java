@@ -6,11 +6,11 @@ import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
-import org.cyk.utility.__kernel__.configuration.VariableName;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.session.SessionHelper;
+import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMap;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
