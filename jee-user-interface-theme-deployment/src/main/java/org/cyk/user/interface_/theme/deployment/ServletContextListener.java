@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebListener;
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
-import org.cyk.utility.system.node.SystemNodeClient;
 
 @WebListener
 public class ServletContextListener extends AbstractServletContextListener implements Serializable {
@@ -18,7 +17,7 @@ public class ServletContextListener extends AbstractServletContextListener imple
 	public void __initialize__(ServletContext context) {
 		super.__initialize__(context);
 		DependencyInjection.setQualifierClass(MenuBuilderMapGetter.class, CustomTheme.class);
-		__inject__(SystemNodeClient.class).setName("User Interface Theme");
+		//DesktopDefaultImpl.MENU_PATH = "/adminfaces/menu.xhtml";
 	}
 	
 }

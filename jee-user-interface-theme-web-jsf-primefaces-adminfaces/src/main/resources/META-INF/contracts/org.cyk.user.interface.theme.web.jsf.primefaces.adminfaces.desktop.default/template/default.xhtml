@@ -5,18 +5,18 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:primefaces_theme="http://primefaces.jsf.web.theme.interface.user.cyk.org">
+      xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
 
     <f:metadata>
-  		<primefaces_theme:contractMetadata/>
+  		<cyk:contractMetadata/>
 	</f:metadata>
 	
     <h:head>
-    	<primefaces_theme:contractHead/>
+    	<cyk:contractHead/>
     </h:head>
     
 	<h:body>
-		<primefaces_theme:contractBody>
+		<cyk:contractBody>
 			<ui:define name="contractBodyWithThemeInsideFormTagBodySecond">
 				<div class="ui-g cyk_layout_page">
 					<ui:insert name="north">
@@ -24,7 +24,7 @@
 						<c:if test="#{viewNorth != null}">
 							<div class="ui-g-12 cyk_layout_page_north">
 								<ui:insert name="northView">
-									<primefaces_theme:view value="#{viewNorth}" />
+									<cyk:view value="#{viewNorth}" />
 								</ui:insert>
 							</div>
 						</c:if>
@@ -34,7 +34,7 @@
 						
 						<ui:insert name="contractBodyWithThemeInsideFormTagBodySecondCenterNorth">
 							<div class="ui-g-12">
-								<primefaces_theme:contractBodyMessages/>
+								<cyk:contractBodyMessages/>
 							</div>
 						</ui:insert>
 						
@@ -43,7 +43,7 @@
 							<c:if test="#{viewCenter != null}">
 								<div class="ui-g-12 cyk_layout_page_center">
 									<ui:insert name="contractBodyWithThemeInsideFormTagBodySecondCenterCenterView">
-										<primefaces_theme:view value="#{viewCenter}" />
+										<cyk:view value="#{viewCenter}" />
 									</ui:insert>
 								</div>
 							</c:if>
@@ -55,14 +55,14 @@
 						<c:if test="#{viewSouth != null}">
 							<div class="ui-g-12 cyk_layout_page_south">
 								<ui:insert name="southView">
-									<primefaces_theme:view value="#{viewSouth}" />
+									<cyk:view value="#{viewSouth}" />
 								</ui:insert>
 							</div>
 						</c:if>
 					</ui:insert>
 				</div>				
 			</ui:define>
-		</primefaces_theme:contractBody>
+		</cyk:contractBody>
     </h:body>
     	
 </html>

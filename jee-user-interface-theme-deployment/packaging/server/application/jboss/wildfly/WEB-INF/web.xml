@@ -8,7 +8,7 @@
 	
 	<context-param>
 		<param-name>cyk.variable.system.name</param-name>
-		<param-value>${cyk.variable.system.name}</param-value>
+		<param-value>User Interface Theme</param-value>
 	</context-param>
 	
 	<context-param>
@@ -24,6 +24,11 @@
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>${cyk.variable.user.interface.theme.primefaces}</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>cyk.variable.user.interface.theme.menu.path</param-name>
+		<param-value>${cyk.variable.user.interface.theme.menu.path}</param-value>
 	</context-param>
 	
 	<!-- Static resources -->

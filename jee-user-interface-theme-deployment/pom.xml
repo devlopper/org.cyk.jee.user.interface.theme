@@ -14,6 +14,10 @@
 	<packaging>war</packaging>
 	<version>0.1.0</version>
 	
+	<properties>
+		<cyk.variable.user.interface.theme.menu.path>/adminfaces/menu.xhtml</cyk.variable.user.interface.theme.menu.path>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.cyk.jee.utility.client.deployment</groupId>

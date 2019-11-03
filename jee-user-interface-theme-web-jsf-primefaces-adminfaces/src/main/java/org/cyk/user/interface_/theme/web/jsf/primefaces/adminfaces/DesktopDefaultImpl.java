@@ -2,6 +2,8 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.adminfaces;
 
 import java.io.Serializable;
 
+import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
+import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.Menu;
 import org.cyk.utility.client.controller.component.menu.MenuRenderTypeColumnPanel;
 import org.cyk.utility.client.controller.component.theme.Theme;
@@ -18,6 +20,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	private static final long serialVersionUID = 1L;
 
 	@Getter private Menu menu;
+	@Getter private String menuPath;
 	
 	@Override
 	public Theme build() {
@@ -29,7 +32,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
 		tag.getProperties().setEnctype("multipart/form-data");
 		mapTags("content.form",tag);
-		
+		menuPath = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_PATH);
 		return theme;
 	}
 	
