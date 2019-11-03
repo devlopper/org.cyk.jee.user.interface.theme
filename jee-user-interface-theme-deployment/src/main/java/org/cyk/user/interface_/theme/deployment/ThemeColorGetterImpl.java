@@ -10,14 +10,14 @@ public class ThemeColorGetterImpl extends AbstractThemeColorGetterImpl implement
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected Object __getByWindowContainerManaged__(Class<? extends WindowContainerManaged> klass) {
+	public Object getByWindowContainerManaged(Class<? extends WindowContainerManaged> klass) {
 		if(CustomThemeColorBluePage.class.equals(klass))
 			return "blue";
 		if(CustomThemeColorOrangePage.class.equals(klass))
 			return "orange";
 		if(CustomThemeColorGreenPage.class.equals(klass))
 			return "green";
-		return super.__getByWindowContainerManaged__(klass);
+		return super.getByWindowContainerManaged(klass);
 	}
 	
 }
