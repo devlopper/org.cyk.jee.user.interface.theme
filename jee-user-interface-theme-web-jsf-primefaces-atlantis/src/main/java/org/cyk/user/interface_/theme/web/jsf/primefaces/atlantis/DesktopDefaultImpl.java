@@ -9,11 +9,9 @@ import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
-import org.cyk.utility.__kernel__.session.SessionHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
-import org.cyk.utility.client.controller.component.menu.MenuBuilderMap;
-import org.cyk.utility.client.controller.component.menu.MenuBuilderMapGetter;
+import org.cyk.utility.client.controller.component.menu.MenuBuilderGetter;
 import org.cyk.utility.client.controller.component.menu.MenuItem;
 import org.cyk.utility.client.controller.component.menu.MenuItemBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuItemBuilders;
@@ -21,7 +19,6 @@ import org.cyk.utility.client.controller.component.tab.Tab;
 import org.cyk.utility.client.controller.component.tab.Tabs;
 import org.cyk.utility.client.controller.component.theme.Theme;
 import org.cyk.utility.client.controller.component.window.Window;
-import org.cyk.utility.client.controller.session.SessionAttributeEnumeration;
 import org.cyk.utility.client.controller.tag.Tag;
 import org.cyk.utility.client.controller.tag.TagForm;
 import org.cyk.utility.client.controller.web.ComponentHelper;
@@ -59,14 +56,15 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag = __inject__(TagForm.class);
 		tag.setIdentifier("menu-form");
 		mapTags("menu.form",tag);
-		
-		MenuBuilderMap menuBuilderMap = (MenuBuilderMap) SessionHelper.getAttributeValueFromRequest(SessionAttributeEnumeration.MENU_BUILDER_MAP,request);
-		if(menuBuilderMap == null)
-			SessionHelper.setAttributeValueFromRequest(SessionAttributeEnumeration.MENU_BUILDER_MAP
-					,menuBuilderMap = __inject__(MenuBuilderMapGetter.class).setRequest(request).execute().getOutput(),request);
-					
+		buildMenu(request);
+		return theme;
+	}
+	
+	private void buildMenu(Object request) {			
+		MenuBuilder menuBuilder = MenuBuilderGetter.getInstance().get(ScopeSession.class, request);
+		if(menuBuilder == null)
+			return;
 		//TODO reduce build time to maximum 1 second
-		MenuBuilder menuBuilder = menuBuilderMap.get(ScopeSession.class);
 		MenuItemBuilders oldMenuItemBuilders = menuBuilder.getItems();
 		if(oldMenuItemBuilders != null) {
 			for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
@@ -90,7 +88,6 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 				getMenuTabs(Boolean.TRUE).add(tab);
 			}
 		}
-		return theme;
 	}
 	
 	@Override
