@@ -42,11 +42,12 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		__addTagScriptResource__(request, "layout.js","js");
 		__addTagScriptResource__(request, "common.js","js");
 		
-		__addTagLinkResourceStyleSheet__(request, "main.css","css");
+		__addTagLinkResourceStyleSheet__(request, "nanoscroller.css","css");
+		__addTagLinkResourceStyleSheet__(request, "animate.css","css");
 		
 		if(color == null)
 			color = StringUtils.substringAfter(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_PRIMEFACES), "atlantis-");
-		__addTagLinkResourceStyleSheet__(request, "colors/layout-"+color+".css","css");
+		__addTagLinkResourceStyleSheet__(request, "layout-"+color+".css","css");
 		
 		Tag tag = __inject__(TagForm.class);
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());

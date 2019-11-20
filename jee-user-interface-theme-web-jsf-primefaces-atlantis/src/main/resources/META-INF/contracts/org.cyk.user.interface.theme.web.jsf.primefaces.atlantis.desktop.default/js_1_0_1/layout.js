@@ -10,7 +10,6 @@ PrimeFaces.widget.Atlantis = PrimeFaces.widget.BaseWidget.extend({
         this.tabMenu = this.jq;
         this.tabMenuNav = this.tabMenu.children('.layout-tabmenu-nav');
         this.tabMenuNavLinks = this.tabMenuNav.find('a');
-        this.tabMenuContents = this.tabMenu.find('.layout-tabmenu-content');
         this.topbar = this.wrapper.children('.topbar');
         this.topbarMenu = this.topbar.children('.topbar-menu');
         this.topbarItems = this.topbarMenu.children('li');
@@ -22,38 +21,23 @@ PrimeFaces.widget.Atlantis = PrimeFaces.widget.BaseWidget.extend({
         this.topbarMenuClick = false;
 
         this._bindEvents();
-        this._restoreMenuState();
     },
     
     _bindEvents: function() {
         var $this = this;
         
         this.tabMenu.find('.menu-button').on('click', function(e) {
+            $this.sidebar.css('overflow','visible');
             $this.wrapper.removeClass('layout-wrapper-menu-active');
             if(!$this.isOverlayMenu()) {
                 $(window).trigger('resize');
             }
-            
-            e.preventDefault();
-        });
-        
-        this.tabMenu.find('.menu-pin-button').on('click', function(e) {
-            var icon = $(this).children('i');
-            if(icon.hasClass('fa-rotate-90'))
-                $this._saveMenuState($(this).closest('.layout-tabmenu-content').index());
-            else
-                $this.clearMenuState();
-                
-            $this.tabMenuContents.find('.menu-pin-button').children('i').toggleClass('fa-rotate-90');
+            $('#contenu').removeClass('layout-main-reduce');
             e.preventDefault();
         });
         
         this.tabMenuNavLinks.on('click', function(e) {
             $this.sidebar.css('overflow','hidden');
-            setTimeout(function() {
-                $this.sidebar.css('overflow','');
-            }, 301);
-            
             var link = $(this);
             link.parent().addClass('active-item').siblings('.active-item').removeClass('active-item');
             $this.wrapper.addClass('layout-wrapper-menu-active');
@@ -173,26 +157,6 @@ PrimeFaces.widget.Atlantis = PrimeFaces.widget.BaseWidget.extend({
     
     isIOS: function(e) {
         return ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i)));
-    },
-    
-    _saveMenuState: function(index) {
-        $.cookie('atlantis_tabmenu_index', index.toString(), {path: '/'});
-    },
-    
-    _restoreMenuState: function() {
-        var activeTabMenu = $.cookie('atlantis_tabmenu_index');
-        if(activeTabMenu) {
-            var tabContents = this.tabMenu.find('.layout-tabmenu-content');
-            tabContents.find('.menu-pin-button').children('i').removeClass('fa-rotate-90');
-            var index = parseInt(activeTabMenu);
-            this.wrapper.addClass('layout-wrapper-menu-active');
-            this.tabMenuNavLinks.eq(index).parent('li').addClass('active-item');
-            tabContents.eq(index).addClass('layout-tabmenu-content-active');
-        }
-    },
-    
-    clearMenuState: function() {
-        $.removeCookie('atlantis_tabmenu_index', {path: '/'});
     }
     
 });
@@ -310,14 +274,6 @@ PrimeFaces.widget.AtlantisMenu = PrimeFaces.widget.BaseWidget.extend({
             }
         }
     },
-    
-    clearActiveItems: function() {
-        var activeItems = this.jq.find('li.active-menuitem'),
-        subContainers = activeItems.children('ul');
-
-        activeItems.removeClass('active-menuitem');
-        subContainers.hide();
-    },
             
     removeMenuitem: function (id) {
         this.expandedMenuitems = $.grep(this.expandedMenuitems, function (value) {
@@ -368,12 +324,7 @@ PrimeFaces.widget.AtlantisMenu = PrimeFaces.widget.BaseWidget.extend({
 });
 
 $(document).ready(function() {
-    var nano = $('.nano'),
-    wrapper = $(document.body).children('.layout-wrapper');
-    
-    if(nano.length && wrapper.length) {
-        nano.nanoScroller({flash:true, isRTL: wrapper.hasClass('layout-rtl')});
-    }
+    $('.nano').nanoScroller({flash:true});
 });
 
 /*!
