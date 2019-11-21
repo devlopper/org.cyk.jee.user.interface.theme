@@ -50,7 +50,8 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	@Override
 	public Theme process(Window window) {
 		menu = window.getMenu(ScopeSession.class);
-		menu.setRenderType(__inject__(MenuRenderTypeColumnPanel.class));
+		if(menu != null)
+			menu.setRenderType(__inject__(MenuRenderTypeColumnPanel.class));
 		__north__(window);
 		__center__(window);
 		__south__(window);

@@ -24,6 +24,31 @@
         
         <h:outputStylesheet library="css" name="starter.css"/>
         -->
+        <ui:fragment rendered="#{__page__.isRenderTypeDialog}">
+			<style>
+				#sidebar{
+					display: none !important;
+				}
+				
+				#content {
+					margin: 0 !important;
+					padding: 0 !important;
+				}
+				
+				.content-header{
+					display: none !important;
+				}
+				
+				.content{
+					margin: 0 !important;
+					padding: 0 !important;
+				}
+				
+				.main-header{
+					display: none !important;
+				}
+			</style>
+		</ui:fragment>
     </ui:define>
 
     <ui:define name="logo">
@@ -86,5 +111,5 @@
     <ui:define name="footer">
     	FOOTER
     </ui:define>
-
+	
 </ui:composition>

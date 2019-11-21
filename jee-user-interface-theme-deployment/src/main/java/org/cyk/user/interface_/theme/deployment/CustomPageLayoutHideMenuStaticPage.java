@@ -11,8 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Named @ViewScoped @Getter @Setter
-public class CustomPageLayoutHideMenuPage extends AbstractPageContainerManagedImpl implements Serializable {
+public class CustomPageLayoutHideMenuStaticPage extends AbstractPageContainerManagedImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
+	@Override
+	public Boolean getIsRenderTypeDialog() {
+		return Boolean.TRUE;
+	}
 }
