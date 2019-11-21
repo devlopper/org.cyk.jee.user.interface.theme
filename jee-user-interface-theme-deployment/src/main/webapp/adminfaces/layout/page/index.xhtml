@@ -9,9 +9,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
 	
-	<cyk:page value="#{customPageLayoutHideMenuDynamicPage}">
+	<cyk:page value="#{customPageLayoutHideMenuIndexPage}">
 		<ui:define name="centerCenter">.
-			MY CONTENT : #{__page__.window.renderType} : #{param}
+			<p:commandButton value="Dynamic" action="#{customPageLayoutHideMenuIndexPage.showDynamic}"/>
+			<p:commandButton value="Static" action="#{customPageLayoutHideMenuIndexPage.showStatic}"/>
 		</ui:define>
 	</cyk:page>
 	
