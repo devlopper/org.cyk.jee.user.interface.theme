@@ -16,7 +16,7 @@
     	<cyk:contractHead/>
     </h:head>
     
-	<h:body>
+	<h:body styleClass="main-body">
 		<cyk:contractBody>
 			<ui:define name="contractBodyWithTheme">
 				<cyk:contractBodyWithThemeBeforeFormTag/>
@@ -66,7 +66,7 @@
 			       				-->
 				            </ui:insert>				            					            
 				            
-				            <div class="layout-main layout-main-reduce" id="contenu">
+				            <div class="layout-main" id="contenu">
 				                <div class="layout-main-content">
 				                	<ui:insert name="__internalLog">
 				                		<ui:fragment rendered="#{__page__.__isInternalLoggable__}">
@@ -99,6 +99,12 @@
 				                	</cyk:form>		                			
 				                </div>
 				            </div>
+				            <!-- footer -->
+				            <div class="footer clearfix">
+						        <p:graphicImage name="logo-white.png" library="image" />
+						        <span>Système Intégré d'Information Budgétaire et Comptable (SIIBC) </span>||
+						        <span>Copyright 2018 Direction Générale du Budget et des Finances. Tous droits reservés.</span>
+						    </div>
 				        </div>
 					</ui:define>
 				</cyk:contractBodyWithThemeInsideFormTag>

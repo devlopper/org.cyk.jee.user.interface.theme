@@ -137,7 +137,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	@Override
 	protected String __getIdentifier__() {
 		return ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_JSF_CONTRACT)
-				,"org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.dgbf");
+				,"org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.default");
 	}
 	
 	@Override
