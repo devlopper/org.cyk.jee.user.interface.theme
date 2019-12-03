@@ -3,12 +3,15 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
+import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderGetter;
@@ -24,11 +27,17 @@ import org.cyk.utility.client.controller.tag.TagForm;
 import org.cyk.utility.client.controller.web.ComponentHelper;
 import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractThemeImpl;
 import org.cyk.utility.scope.ScopeSession;
+import org.primefaces.model.menu.MenuModel;
+
+import lombok.Getter;
 
 public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefault,Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Tabs menuTabs;
+	@Getter private Map<Object,Tabs> menuMapKeys = new HashMap<>();
+	
+	@Getter private MenuModel model;
 	
 	@Override
 	public Theme build() {
@@ -57,15 +66,49 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag = __inject__(TagForm.class);
 		tag.setIdentifier("menu-form");
 		mapTags("menu.form",tag);
-		buildMenu(request);
+		
+		
+		/*
+		model = new DefaultMenuModel();
+        //First submenu
+        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
+ 
+        DefaultMenuItem item = new DefaultMenuItem("External");
+        firstSubmenu.getElements().add(item); 
+        model.getElements().add(firstSubmenu);
+ 
+        //Second submenu
+        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
+        item = new DefaultMenuItem("Save");
+        secondSubmenu.getElements().add(item);
+ 
+        item = new DefaultMenuItem("Delete");
+        secondSubmenu.getElements().add(item);
+ 
+        item = new DefaultMenuItem("Redirect");
+        secondSubmenu.getElements().add(item);
+ 
+        model.getElements().add(secondSubmenu);
+		System.out.println("DesktopDefaultImpl.build() : "+model);
+		*/
 		return theme;
 	}
 	
-	private void buildMenu(Object request) {			
-		MenuBuilder menuBuilder = MenuBuilderGetter.getInstance().get(ScopeSession.class, request);
+	@Override
+	protected void __buildMenu__(Object menuMapKey) {
+		menuTabs = menuMapKeys.get(menuMapKey);
+		if(menuTabs != null)
+			return;
+				
+		menuTabs = __inject__(Tabs.class);
+		menuMapKeys.put(menuMapKey, menuTabs);
+		
+		Object request = getRequest();
+		MenuBuilder menuBuilder = MenuBuilderGetter.getInstance().get(menuMapKey,ScopeSession.class, request);
 		if(menuBuilder == null)
 			return;
 		//TODO reduce build time to maximum 1 second
+		
 		MenuItemBuilders oldMenuItemBuilders = menuBuilder.getItems();
 		if(oldMenuItemBuilders != null) {
 			for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
@@ -86,14 +129,15 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 				tab.setProperty(Properties.ICON, item.getCommandable().getProperties().getIcon());
 				if(items != null)
 					tab.setProperty(Properties.MENU,__inject__(MenuBuilder.class).setItems(items).setRequest(request).execute().getOutput());
-				getMenuTabs(Boolean.TRUE).add(tab);
+				menuTabs.add(tab);
 			}
 		}
 	}
 	
 	@Override
 	protected String __getIdentifier__() {
-		return "org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.default";
+		return ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_JSF_CONTRACT)
+				,"org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.dgbf");
 	}
 	
 	@Override

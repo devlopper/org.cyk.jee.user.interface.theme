@@ -69,5 +69,10 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	private void __south__(Window window) {
 		
 	}
+
+	@Override
+	protected void __buildMenu__(Object menuMapKey) {
+		
+	}
 	
 }

@@ -37,6 +37,15 @@
 				<cyk.variable.user.interface.theme.favicon.file.name.prefix>ivorycoast</cyk.variable.user.interface.theme.favicon.file.name.prefix>
 			</properties>
 		</profile>
+		
+		<profile>
+			<id>dgbf</id>
+			<properties>
+				<cyk.variable.user.interface.theme.jsf.contract>org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.dgbf</cyk.variable.user.interface.theme.jsf.contract>
+			</properties>
+		</profile>
+		
+		
 	</profiles>
 	
 </project>

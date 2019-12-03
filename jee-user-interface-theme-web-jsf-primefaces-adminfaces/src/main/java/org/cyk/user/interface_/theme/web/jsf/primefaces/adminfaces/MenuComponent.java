@@ -23,9 +23,11 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException {
-		org.cyk.utility.client.controller.component.menu.Menu menu = (org.cyk.utility.client.controller.component.menu.Menu) getAttributes().get("value");
+		System.out.println("MenuComponent.encodeBegin()");
+		//org.cyk.utility.client.controller.component.menu.Menu menu = (org.cyk.utility.client.controller.component.menu.Menu) getAttributes().get("value");
 		ResponseWriter writer = context.getResponseWriter();
 		//<ul class="sidebar-menu tree" data-widget="tree">
+		/*
 		writer.startElement("ul", this);
 		writer.writeAttribute("class", "sidebar-menu tree",null);
 		writer.writeAttribute("data-widget", "tree",null);
@@ -38,6 +40,10 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 		}
 		
 		writer.endElement("ul");
+		*/
+		
+		//writer.startElement("h1", this);
+		writer.append("<h1>Hello</h1>");
 	}
 
 	protected void addLi(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{

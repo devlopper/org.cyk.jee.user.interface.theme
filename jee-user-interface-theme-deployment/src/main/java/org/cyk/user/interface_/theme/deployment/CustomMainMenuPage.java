@@ -14,5 +14,13 @@ import lombok.Setter;
 public class CustomMainMenuPage extends AbstractPageContainerManagedImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	protected Object __getMenuBuilderMapKey__() {
+		return "customsessionmenu";
+	}
 	
+	@Override
+	protected String __getWindowTitleValue__() {
+		return "Custom menus";
+	}
 }
