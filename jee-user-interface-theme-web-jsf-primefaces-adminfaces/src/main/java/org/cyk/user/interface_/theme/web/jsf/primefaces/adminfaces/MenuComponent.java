@@ -10,6 +10,7 @@ import javax.faces.context.ResponseWriter;
 
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.string.StringHelper;
+import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.client.controller.component.menu.MenuItem;
 
 @FacesComponent(createTag = true, tagName = "menu", namespace = "http://runtime.adminfaces.primefaces.jsf.web.theme.interface.user.cyk.org")
@@ -22,12 +23,32 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 	}
 
 	@Override
-	public void encodeBegin(FacesContext context) throws IOException {
-		System.out.println("MenuComponent.encodeBegin()");
-		//org.cyk.utility.client.controller.component.menu.Menu menu = (org.cyk.utility.client.controller.component.menu.Menu) getAttributes().get("value");
+	public void encodeBegin(FacesContext context) throws IOException {		
+		org.cyk.utility.client.controller.component.menu.Menu menu = (org.cyk.utility.client.controller.component.menu.Menu) getAttributes().get("value");
+		if(menu == null)
+			return;
 		ResponseWriter writer = context.getResponseWriter();
-		//<ul class="sidebar-menu tree" data-widget="tree">
 		/*
+		<ul class="sidebar-menu tree" data-widget="tree">
+	        <li>
+	            <p:link outcome="/index" onclick="clearBreadCrumbs()">
+	                <i class="fa fa-home"></i>
+	                <span>My Home</span>
+	            </p:link>
+	        </li>
+		</ul>
+		*/
+		/*
+		writer.append("<ul class=\"sidebar-menu tree\" data-widget=\"tree\">");
+		writer.append(" <li>");
+		writer.append("<a href=\"/index\" onclick=\"clearBreadCrumbs()\">");
+		writer.append("<i class=\"fa fa-home\"></i>");
+		writer.append("<span>My Home</span>");
+		writer.append(" </a>");
+		writer.append("</li>");
+		writer.append("</ul>");
+		*/
+		
 		writer.startElement("ul", this);
 		writer.writeAttribute("class", "sidebar-menu tree",null);
 		writer.writeAttribute("data-widget", "tree",null);
@@ -40,10 +61,6 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 		}
 		
 		writer.endElement("ul");
-		*/
-		
-		//writer.startElement("h1", this);
-		writer.append("<h1>Hello</h1>");
 	}
 
 	protected void addLi(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{
@@ -53,12 +70,9 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 	}
 	
 	private void addLi(ResponseWriter writer,MenuItem item) throws IOException{
-		/*writer.startElement("li", this);
-		String url = null;
-		if(item.getCommandable().getNavigation()!=null && item.getCommandable().getNavigation().getUniformResourceLocator()!=null)
-			url = item.getCommandable().getNavigation().getUniformResourceLocator().toString();
-		addLink(writer, (String) item.getCommandable().getProperties().getIcon(),item.getCommandable().getName(),url,null);
-		if(Boolean.TRUE.equals(DependencyInjection.inject(CollectionHelper.class).isNotEmpty(item.getChildren()))) {
+		writer.startElement("li", this);
+		addLink(writer, (String) item.getCommandable().getProperties().getIcon(),item.getCommandable().getName(),item.getCommandable().getUniformResourceIdentifier(),null);
+		if(CollectionHelper.isNotEmpty(item.getChildren())) {
 			writer.startElement("ul", this);
 			for(Object index : item.getChildren()) {
 				if(index instanceof MenuItem)
@@ -67,12 +81,11 @@ public class MenuComponent extends UIComponentBase implements Serializable {
 			writer.endElement("ul");
 		}
 		writer.endElement("li");
-		*/
 	}
 	
 	private void addLink(ResponseWriter writer,String iconClass,String text,String href,String onClick) throws IOException{
 		writer.startElement("a", this);
-		writeAttributeIfValueNotBlank(writer,"href",href);
+		writeAttributeIfValueNotBlank(writer,"href",ValueHelper.defaultToIfBlank(href, "#"));
 		writeAttributeIfValueNotBlank(writer,"onclick",onClick);
 		addIcon(writer, iconClass);
 		addText(writer, text);

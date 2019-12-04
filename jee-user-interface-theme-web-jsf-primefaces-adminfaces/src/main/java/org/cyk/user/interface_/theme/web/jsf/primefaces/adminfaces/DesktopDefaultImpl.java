@@ -3,9 +3,11 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.adminfaces;
 import java.io.Serializable;
 
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
+import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.Menu;
-import org.cyk.utility.client.controller.component.menu.MenuRenderTypeColumnPanel;
+import org.cyk.utility.client.controller.component.menu.MenuBuilder;
+import org.cyk.utility.client.controller.component.menu.MenuBuilderGetter;
 import org.cyk.utility.client.controller.component.theme.Theme;
 import org.cyk.utility.client.controller.component.window.Window;
 import org.cyk.utility.client.controller.tag.Tag;
@@ -32,7 +34,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
 		tag.getProperties().setEnctype("multipart/form-data");
 		mapTags("content.form",tag);
-		menuPath = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_PATH);
+		menuPath = ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_PATH),"/menu.xhtml");
 		return theme;
 	}
 	
@@ -49,9 +51,6 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	
 	@Override
 	public Theme process(Window window) {
-		menu = window.getMenu(ScopeSession.class);
-		if(menu != null)
-			menu.setRenderType(__inject__(MenuRenderTypeColumnPanel.class));
 		__north__(window);
 		__center__(window);
 		__south__(window);
@@ -72,7 +71,12 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 
 	@Override
 	protected void __buildMenu__(Object menuMapKey) {
-		
+		if(menu != null)
+			return;
+		MenuBuilder menuBuilder = MenuBuilderGetter.getInstance().get(menuMapKey,ScopeSession.class, getRequest());
+		if(menuBuilder == null)
+			return;
+		menu = menuBuilder.execute().getOutput();
 	}
 	
 }
