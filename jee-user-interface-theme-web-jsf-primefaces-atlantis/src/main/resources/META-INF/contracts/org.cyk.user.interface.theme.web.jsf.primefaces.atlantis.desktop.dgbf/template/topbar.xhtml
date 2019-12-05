@@ -16,50 +16,37 @@
         </div>
         
         <p:outputLabel styleClass="app-name-style">
-            <p:link value="SIIBC" style="color: #ffffff !important;" href="#" />
+            <p:link value="SIIBC" style="color: #ffffff !important;font-weight: normal !important;" href="http://10.3.4.20:30300/sib/portail/" />
             <p:spacer width="2" />
             
-            <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px"></i>
+            <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px;"></i>
             <p:spacer width="6" />
-            <p:link value="#{__page__.window.getOutputStringText('applicationName').value}" style="color: #ffffff !important;" outcome="indexView"/>            
+            <p:link value="#{__page__.window.getOutputStringText('applicationName').value}" style="color: #ffffff !important;font-weight: normal !important;" outcome="indexView"/>            
         </p:outputLabel>
-        <!--
-        <div style="position: absolute; left: 60px; top: 8px; z-index: 1;">
-        	<ui:insert name="topBarApplicationName">
-        		<cyk:outputText value="#{__page__.window.getOutputStringText('applicationName')}" />	
-        	</ui:insert>            
-        </div>
-        -->
+       	
         <a id="topbar-menu-button" href="#">
             <i class="fa fa-bars"/>
         </a>
         
         <ul class="topbar-menu fadeInDown animated">
             <li class="profile-item">
-                <a href="#" style="text-decoration: none !important">                                     
-                    <div class="profile-image">                        
-                        <div class="user-icon">
-                        	<i class="fa fa-user"/>
-                        </div>
-                    </div>
-                    <div class="profile-info">
-                        <span class="topbar-item-name profile-name">#{__page__.session.user.names}</span>
-                        <!--
-                        <span class="topbar-item-name profile-role">#{__page__.window.theme.roles}</span>
-                        -->
-                    </div>
-                </a>
-                
-                <ul class="animated">
-                	<c:forEach items="#{__page__.window.theme.userMenuUlLis}" var="li">
-                		<li role="menuitem">                        
-	                        <a href="#{li[1]}">
-	                            <i class="#{li[2]}"/>
-	                            <span>#{li[0]}</span>
-	                        </a>
-	                    </li>
-                	</c:forEach>
-                </ul>
+            	<a href="#">                            
+		            <div class="profile-image">
+		                <p:graphicImage name="profile-image.png" library="image" />
+		            </div>
+		            <div class="profile-info">
+		                <span class="topbar-item-name profile-name">#{__page__.session.user.names}</span>
+		                <!--
+		                <span class="topbar-item-name profile-role">System Admin</span>
+		                -->
+		            </div>
+		        </a>
+		        
+		        <ul class="animated">
+		            <h:form>
+		                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{__page__.window.theme.topMenu}"/>
+		            </h:form>
+		        </ul>
             </li>
             <!--
             <li>

@@ -4,20 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyk.utility.__kernel__.DependencyInjection;
+import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierAsFunctionParameter;
 import org.cyk.utility.__kernel__.identifier.resource.UniformResourceIdentifierHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
+import org.cyk.utility.bean.Property;
+import org.cyk.utility.client.controller.component.menu.Menu;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderGetter;
-import org.cyk.utility.client.controller.component.menu.MenuItem;
-import org.cyk.utility.client.controller.component.menu.MenuItemBuilder;
-import org.cyk.utility.client.controller.component.menu.MenuItemBuilders;
 import org.cyk.utility.client.controller.component.tab.Tab;
 import org.cyk.utility.client.controller.component.tab.Tabs;
 import org.cyk.utility.client.controller.component.theme.Theme;
@@ -29,15 +31,18 @@ import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractThemeImpl;
 import org.cyk.utility.scope.ScopeSession;
 import org.primefaces.model.menu.MenuModel;
 
+import ci.gouv.dgbf.sib.menu.generator.MenuGenerator;
+import ci.gouv.dgbf.sib.menu.generator.domain.MenuTab;
 import lombok.Getter;
 
 public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefault,Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Tabs menuTabs;
+	@Getter private Tabs leftMenuTabs;
+	
 	@Getter private Map<Object,Tabs> menuMapKeys = new HashMap<>();
 	
-	@Getter private MenuModel model;
+	@Getter private MenuModel topMenu;
 	
 	@Override
 	public Theme build() {
@@ -53,6 +58,7 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		
 		__addTagLinkResourceStyleSheet__(request, "nanoscroller.css","css");
 		__addTagLinkResourceStyleSheet__(request, "animate.css","css");
+		__addTagLinkResourceStyleSheet__(request, "main.css","css");
 		
 		if(color == null)
 			color = StringUtils.substringAfter(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_PRIMEFACES), "atlantis-");
@@ -66,49 +72,28 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 		tag = __inject__(TagForm.class);
 		tag.setIdentifier("menu-form");
 		mapTags("menu.form",tag);
-		
-		
-		/*
-		model = new DefaultMenuModel();
-        //First submenu
-        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
- 
-        DefaultMenuItem item = new DefaultMenuItem("External");
-        firstSubmenu.getElements().add(item); 
-        model.getElements().add(firstSubmenu);
- 
-        //Second submenu
-        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
-        item = new DefaultMenuItem("Save");
-        secondSubmenu.getElements().add(item);
- 
-        item = new DefaultMenuItem("Delete");
-        secondSubmenu.getElements().add(item);
- 
-        item = new DefaultMenuItem("Redirect");
-        secondSubmenu.getElements().add(item);
- 
-        model.getElements().add(secondSubmenu);
-		System.out.println("DesktopDefaultImpl.build() : "+model);
-		*/
 		return theme;
 	}
 	
 	@Override
 	protected void __buildMenu__(Object menuMapKey) {
-		menuTabs = menuMapKeys.get(menuMapKey);
-		if(menuTabs != null)
-			return;
-				
-		menuTabs = __inject__(Tabs.class);
-		menuMapKeys.put(menuMapKey, menuTabs);
-		
+		leftMenuTabs = menuMapKeys.get(menuMapKey);
+		if(leftMenuTabs != null)
+			return;			
+		/*
 		Object request = getRequest();
 		MenuBuilder menuBuilder = MenuBuilderGetter.getInstance().get(menuMapKey,ScopeSession.class, request);
 		if(menuBuilder == null)
 			return;
 		//TODO reduce build time to maximum 1 second
+		*/
+		leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-ACTEUR"));		
+		MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-MYOWNER"));
+		if(topMenuTab != null)
+			topMenu = topMenuTab.getMenuModel();
 		
+		//List<MenuTab> accountListMenu = new ArrayList<>();
+		/*
 		MenuItemBuilders oldMenuItemBuilders = menuBuilder.getItems();
 		if(oldMenuItemBuilders != null) {
 			for(MenuItemBuilder index : oldMenuItemBuilders.get()) {
@@ -132,6 +117,28 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 				menuTabs.add(tab);
 			}
 		}
+		*/
+		menuMapKeys.put(menuMapKey, leftMenuTabs);
+	}
+	
+	private Tabs __build__(List<MenuTab> tabs) {
+		if(CollectionHelper.isEmpty(tabs))
+			return null;
+		Tabs __tabs__ = __inject__(Tabs.class);
+		for(MenuTab index : tabs) {
+			Tab tab = __inject__(Tab.class);
+			tab.setProperty(Properties.NAME, index.getTitle());
+			tab.setProperty(Properties.ICON, index.getIcon());
+			if(index.getMenuModel() != null) {
+				Menu menu = __inject__(Menu.class);
+				menu.setTargetModel(__inject__(Property.class));
+				menu.getTargetModel().setValue(index.getMenuModel());
+				menu.getTargetModel().setIsDerived(Boolean.TRUE);
+				tab.setProperty(Properties.MENU,menu);
+			}
+			__tabs__.add(tab);
+		}
+		return __tabs__;
 	}
 	
 	@Override
@@ -167,19 +174,19 @@ public class DesktopDefaultImpl extends AbstractThemeImpl implements DesktopDefa
 	
 	@Override
 	public Tabs getMenuTabs() {
-		return menuTabs;
+		return leftMenuTabs;
 	}
 	
 	@Override
 	public Tabs getMenuTabs(Boolean injectIfNull) {
-		if(menuTabs == null && Boolean.TRUE.equals(injectIfNull))
-			menuTabs = __inject__(Tabs.class);
-		return menuTabs;
+		if(leftMenuTabs == null && Boolean.TRUE.equals(injectIfNull))
+			leftMenuTabs = __inject__(Tabs.class);
+		return leftMenuTabs;
 	}
 	
 	@Override
 	public DesktopDefault setMenuTabs(Tabs menuTabs) {
-		this.menuTabs = menuTabs;
+		this.leftMenuTabs = menuTabs;
 		return this;
 	}
 

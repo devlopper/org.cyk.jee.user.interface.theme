@@ -38,32 +38,11 @@
 				            </ui:insert>
 				            
 				            <ui:insert name="menuLeft">
-				            	<!--
-				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'MENU_LEFT' : __page__.sessionUser.identifier}">
-				            	-->
-					            	<div class="layout-sidebar">
-					            		<ui:insert name="menuLeftTabs">
-					            			<!--
-					            			<h:form id="menu-form">
-					            			<pa:menu model="#{__page__.window.theme.model}" />
-					            			</h:form>
-					            			-->
-					            			
-					            			<pa:tabMenu>
-					                			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab" >
-								                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
-						                				<h:form id="menu-form">
-						                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
-									                	</h:form>
-									                </pa:tab>
-								                </c:forEach>
-					           				</pa:tabMenu>
-					           				
-					            		</ui:insert>
-				       				</div>
-			       				<!--
-			       				</p:cache>
-			       				-->
+					            <div class="layout-sidebar">
+					            	<ui:insert name="menuLeftTabs">
+					            		<ui:include src="menuLeftTabs.xhtml"/>					           				
+					            	</ui:insert>
+				       			</div>
 				            </ui:insert>				            					            
 				            
 				            <div class="layout-main" id="contenu">
@@ -99,12 +78,6 @@
 				                	</cyk:form>		                			
 				                </div>
 				            </div>
-				            <!-- footer -->
-				            <div class="footer clearfix">
-						        <p:graphicImage name="logo-white.png" library="image" />
-						        <span>Système Intégré d'Information Budgétaire et Comptable (SIIBC) </span>||
-						        <span>Copyright 2018 Direction Générale du Budget et des Finances. Tous droits reservés.</span>
-						    </div>
 				        </div>
 					</ui:define>
 				</cyk:contractBodyWithThemeInsideFormTag>
