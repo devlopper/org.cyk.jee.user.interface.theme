@@ -16,7 +16,7 @@
     	<cyk:contractHead/>
     </h:head>
     
-	<h:body>
+	<h:body styleClass="main-body">
 		<cyk:contractBody>
 			<ui:define name="contractBodyWithTheme">
 				<cyk:contractBodyWithThemeBeforeFormTag/>
@@ -38,35 +38,14 @@
 				            </ui:insert>
 				            
 				            <ui:insert name="menuLeft">
-				            	<!--
-				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'MENU_LEFT' : __page__.sessionUser.identifier}">
-				            	-->
-					            	<div class="layout-sidebar">
-					            		<ui:insert name="menuLeftTabs">
-					            			<!--
-					            			<h:form id="menu-form">
-					            			<pa:menu model="#{__page__.window.theme.model}" />
-					            			</h:form>
-					            			-->
-					            			
-					            			<pa:tabMenu>
-					                			<c:forEach items="#{__page__.window.theme.leftMenuTabs.get()}" var="tab" >
-								                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
-						                				<h:form id="menu-form">
-						                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
-									                	</h:form>
-									                </pa:tab>
-								                </c:forEach>
-					           				</pa:tabMenu>
-					           				
-					            		</ui:insert>
-				       				</div>
-			       				<!--
-			       				</p:cache>
-			       				-->
+					            <div class="layout-sidebar">
+					            	<ui:insert name="menuLeftTabs">
+					            		<ui:include src="menuLeftTabs.xhtml"/>					           				
+					            	</ui:insert>
+				       			</div>
 				            </ui:insert>				            					            
 				            
-				            <div class="layout-main layout-main-reduce" id="contenu">
+				            <div class="layout-main" id="contenu">
 				                <div class="layout-main-content">
 				                	<ui:insert name="__internalLog">
 				                		<ui:fragment rendered="#{__page__.__isInternalLoggable__}">

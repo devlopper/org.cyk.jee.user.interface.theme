@@ -30,6 +30,11 @@
 			<artifactId>jee-utility-client-deployment</artifactId>
 			<version>0.1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf</groupId>
+			<artifactId>jee-user-interface-theme-web-jsf-primefaces-atalntis-dgbf</artifactId>
+			<version>0.1.0</version>
+		</dependency>
 	</dependencies>
 	
 	<profiles>
@@ -45,7 +50,8 @@
 		<profile>
 			<id>dgbf</id>
 			<properties>
-				<cyk.variable.user.interface.theme.jsf.contract>org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.desktop.dgbf</cyk.variable.user.interface.theme.jsf.contract>
+				<cyk.variable.user.interface.theme.class.name>org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.DesktopDefault</cyk.variable.user.interface.theme.class.name>
+				<cyk.variable.user.interface.theme.jsf.contract>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf.desktop.default</cyk.variable.user.interface.theme.jsf.contract>
 			</properties>
 		</profile>
 		
