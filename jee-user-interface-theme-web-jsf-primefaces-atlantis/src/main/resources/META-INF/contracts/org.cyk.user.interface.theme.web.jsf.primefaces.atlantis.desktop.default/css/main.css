@@ -34,6 +34,62 @@
 
 /* CYK */
 
+.cyk-font-weight-bold {
+	font-weight : bold !important;
+}
+
 .cyk-business-identifier {
 	font-weight : bold !important;
+}
+
+.cyk-page-form-content-messages {
+	padding: 0px !important;
+}
+
+.cyk-page-form-content-title {
+	font-size: large !important;
+	font-weight: bold !important;
+}
+
+.cyk-top-bar-application-name {
+	font-size: x-large !important;
+	font-weight: bold !important;
+	position: absolute !important;
+	left: 60px !important;
+	top: 8px !important;
+	z-index: 1 !important;
+	color: white !important;
+	padding-left: 5px !important;
+}
+
+.cyk-min-width-100-percent {
+	min-width: 100% !important;
+}
+
+.cyk-min-height-100-percent {
+	min-height: 100% !important;
+}
+
+.cyk-min-width-90-percent {
+	min-width: 90% !important;
+}
+
+.cyk-min-height-90-percent {
+	min-height: 90% !important;
+}
+
+.cyk-text-transform-uppercase {
+	text-transform: uppercase !important;
+}
+
+.cyk-background-highlight {
+	background: #ff4d4d !important;
+}
+
+.cyk-margin-left-5-px {
+	margin-left : 5px !important;
+}
+
+.cyk-margin-left-10-px {
+	margin-left : 10px !important;
 }
