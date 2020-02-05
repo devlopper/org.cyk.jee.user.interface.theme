@@ -16,7 +16,10 @@
         </div>
         
         <p:outputLabel styleClass="app-name-style">
+            <!--
             <p:link value="SIIBC" style="color: #ffffff !important;font-weight: normal !important;" href="http://10.3.4.20:30300/sib/portail/" />
+            -->
+            <p:link value="#{__page__.window.theme.systemName}" style="color: #ffffff !important;font-weight: normal !important;" href="#{__page__.window.theme.systemLink}" />
             <p:spacer width="2" />
             
             <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px;"></i>
@@ -28,79 +31,27 @@
             <i class="fa fa-bars"/>
         </a>
         
-        <ul class="topbar-menu fadeInDown animated">
-            <li class="profile-item">
-            	<a href="#">                            
-		            <div class="profile-image">
-		                <p:graphicImage name="profile-image.png" library="image" />
-		            </div>
-		            <div class="profile-info">
-		                <span class="topbar-item-name profile-name">#{__page__.session.user.names}</span>
-		                <!--
-		                <span class="topbar-item-name profile-role">System Admin</span>
-		                -->
-		            </div>
-		        </a>
-		        
-		        <ul class="animated">
-		            <h:form>
-		                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{__page__.window.theme.topMenu}"/>
-		            </h:form>
-		        </ul>
-            </li>
-            <!--
-            <li>
-                <a href="#">
-                	<i class="fa fa-th"/>
-                </a>    
-                
-                <ul class="animated">                    
-                    <li style="margin-left: 13px">                       
-                        <strong>OTHER APPLICATIONS</strong>
-                    </li>
-                    <li role="menuitem">                                                             
-                    	<p:link>
-                        	<i class="fa fa-users"/>
-                        	App 1
-                        </p:link>
-                    </li>
-                    <li role="menuitem">                                                             
-                    	<p:link>
-                        	<i class="fa fa-windows"/>
-                        	App 2
-                        </p:link>
-                    </li>
-                    <li role="menuitem">                                                             
-                    	<p:link>
-                        	<i class="fa fa-linux"/>
-                        	App 3
-                        </p:link>
-                    </li>
-                </ul>
-            </li>
-            -->
-            <!--
-            <li>
-                <a href="#">
-                    <i class="topbar-icon material-icons animated swing fa fa-fw fa-envelope-o" style="font-size: 22px"></i>
-                    <span class="topbar-badge animated rubberBand">5</span>
-                    <span class="topbar-item-name">Messages</span>
-                </a>
-                <ul class="animated">
-                    <li role="menuitem">
-                        <a href="#" class="topbar-message">
-                            <span>Message 1</span>
-                        </a>
-                    </li>
-                    <li role="menuitem">
-                        <a href="#" class="topbar-message">
-                            <span>Message 2</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>           
-        	-->
-        </ul>
+        <ui:fragment rendered="#{__page__.window.theme.isShowUserMenu}">
+        	<ul class="topbar-menu fadeInDown animated">
+	            <li class="profile-item">
+	            	<a href="#">                            
+			            <div class="profile-image">
+			                <p:graphicImage name="profile-image.png" library="image" />
+			            </div>
+			            <div class="profile-info">
+			                <span class="topbar-item-name profile-name">#{__page__.session.user.names}</span>
+			            </div>
+			        </a>
+			        
+			        <ul class="animated">
+			            <h:form>
+			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{__page__.window.theme.topMenu}"/>
+			            </h:form>
+			        </ul>
+	            </li>
+	        </ul>
+        </ui:fragment>
+	        
     </div>
 
 </ui:composition>

@@ -19,10 +19,14 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
-		leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-ACTEUR"));		
-		MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-MYOWNER"));
-		if(topMenuTab != null)
-			topMenu = topMenuTab.getMenuModel();
+		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
+			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-ACTEUR"));		
+			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-MYOWNER"));
+			if(topMenuTab != null)
+				topMenu = topMenuTab.getMenuModel();	
+		}else
+			super.____buildMenu____(menuMapKey);
+		
 	}
 	
 	private Tabs __build__(List<MenuTab> tabs) {
@@ -49,4 +53,23 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	protected String __getIdentifierDefault__() {
 		return "org.cyk.user.interface.theme.web.jsf.primefaces.atlantis.dgbf.desktop.default";
 	}
+	
+	public String getSystemName() {
+		return SYSTEM_NAME;
+	}
+	
+	public String getSystemLink() {
+		return SYSTEM_LINK;
+	}
+	
+	public Boolean getIsShowUserMenu() {
+		return IS_SHOW_USER_MENU;
+	}
+	
+	/**/
+	
+	public static Boolean DYNAMIC_MENU = Boolean.TRUE;
+	public static Boolean IS_SHOW_USER_MENU = Boolean.TRUE;
+	public static String SYSTEM_NAME = "SIIBC";
+	public static String SYSTEM_LINK = "http://10.3.4.20:30300/sib/portail/";
 }
