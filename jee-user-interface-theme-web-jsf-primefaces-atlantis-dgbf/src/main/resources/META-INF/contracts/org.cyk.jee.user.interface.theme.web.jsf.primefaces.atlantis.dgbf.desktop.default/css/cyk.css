@@ -2,6 +2,14 @@
 	width: 100% !important;
 }
 
+.ui-inputfield {
+	width: 100% !important;
+}
+
+.ui-calendar {
+	width: 100% !important;
+}
+
 .ui-picklist .ui-picklist-list {
 	width: 100% x !important;
 }
