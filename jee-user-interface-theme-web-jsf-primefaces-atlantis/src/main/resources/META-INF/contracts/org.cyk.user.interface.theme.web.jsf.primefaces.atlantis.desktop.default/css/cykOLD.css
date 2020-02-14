@@ -2,19 +2,9 @@
 	width: 100% !important;
 }
 
-.ui-inputfield {
-	width: 100% !important;
-}
-
-.ui-calendar {
-	width: 100% !important;
-}
-
 .ui-picklist .ui-picklist-list {
 	width: 100% x !important;
 }
-
-/* Select one menu */
 
 .ui-selectonemenu {
 	min-width : 100% !important;
@@ -30,27 +20,16 @@
 	width: 100% !important;
 }
 
-/* Check box */
-
 .ui-chkbox {
-	margin-right: 5px !important;
-	float: left !important;
+	margin-right: 15px !important;
 }
 
-/* Auto complete */
-		
 .ui-autocomplete {
 	width: 100% !important;
 }
 
 .ui-autocomplete-input {
 	width: 100% !important;
-}
-
-/* Data Table */
-
-.ui-datatable td {
-	padding: 2px !important;
 }
 
 /* CYK */
