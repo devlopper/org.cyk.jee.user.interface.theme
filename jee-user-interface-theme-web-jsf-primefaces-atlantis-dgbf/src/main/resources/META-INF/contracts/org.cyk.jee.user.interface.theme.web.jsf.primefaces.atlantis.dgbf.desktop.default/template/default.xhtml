@@ -63,16 +63,22 @@
 													</div>
 												</ui:insert>
 												
-												<ui:insert name="centerCenter">
-													<c:set var="viewCenter" value="#{theme.viewMap.get('center')}" />
-													<c:if test="#{viewCenter != null}">
-														<div class="ui-g-12">
-															<ui:insert name="centerView">
-																<cyk:view value="#{viewCenter}" />
-															</ui:insert>
-														</div>
-													</c:if>
-												</ui:insert>
+												<!--
+												<p:outputPanel id="formCenterCenterOutputPanel">
+												-->
+													<ui:insert name="centerCenter">
+														<c:set var="viewCenter" value="#{theme.viewMap.get('center')}" />
+														<c:if test="#{viewCenter != null}">
+															<div class="ui-g-12">
+																<ui:insert name="centerView">
+																	<cyk:view value="#{viewCenter}" />
+																</ui:insert>
+															</div>
+														</c:if>
+													</ui:insert>
+												<!--
+												</p:outputPanel>
+												-->	
 					                		</ui:insert>
 				                		</ui:define>
 				                	</cyk:form>		                			
