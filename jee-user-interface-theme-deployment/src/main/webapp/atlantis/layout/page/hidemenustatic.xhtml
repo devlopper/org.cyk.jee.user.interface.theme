@@ -9,8 +9,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
 	
-	<cyk:page value="#{customPageLayoutHideMenuPage}">
-		<ui:define name="menuLeft"/>
+	<cyk:page value="#{customPageLayoutHideMenuStaticPage}">
+		<ui:define name="centerCenter">
+			STATIC : Render type is dialog = #{__page__.isRenderTypeDialog}
+		</ui:define>
 	</cyk:page>
 	
 </html>

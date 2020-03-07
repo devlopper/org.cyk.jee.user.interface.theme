@@ -10,8 +10,8 @@
       xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
 	
 	<cyk:page value="#{customPageLayoutHideMenuDynamicPage}">
-		<ui:define name="centerCenter">.
-			MY CONTENT : #{__page__.window.renderType} : #{param}
+		<ui:define name="centerCenter">
+			DYNAMIC : Render type is dialog = #{__page__.isRenderTypeDialog}
 		</ui:define>
 	</cyk:page>
 	

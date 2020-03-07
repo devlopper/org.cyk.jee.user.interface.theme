@@ -27,39 +27,43 @@
 					
 					<ui:define name="contractBodyWithThemeInsideFormTagBodySecond">
 						<div class="layout-wrapper">
-				            <ui:insert name="menuTop">
-				            	<!--
-				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'TOP_BAR' : __page__.sessionUser.identifier}">
-				            	-->
-				            		<ui:include src="topbar.xhtml" />
-				            	<!--
-				            	</p:cache>
-				            	-->
-				            </ui:insert>
+							<ui:fragment rendered="#{not __page__.isRenderTypeDialog}">
+					            <ui:insert name="menuTop">
+					            	<!--
+					            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'TOP_BAR' : __page__.sessionUser.identifier}">
+					            	-->
+					            		<ui:include src="topbar.xhtml" />
+					            	<!--
+					            	</p:cache>
+					            	-->
+					            </ui:insert>
+				            </ui:fragment>
 				            
-				            <ui:insert name="menuLeft">
-				            	<!--
-				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'MENU_LEFT' : __page__.sessionUser.identifier}">
-				            	-->
-					            	<div class="layout-sidebar">
-					            		<ui:insert name="menuLeftTabs">
-					            			<pa:tabMenu>
-					                			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab" >
-								                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
-						                				<h:form id="menu-form">
-						                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
-									                	</h:form>
-									                </pa:tab>
-								                </c:forEach>
-					           				</pa:tabMenu>
-					            		</ui:insert>
-				       				</div>
-			       				<!--
-			       				</p:cache>
-			       				-->
-				            </ui:insert>				            					            
+				            <ui:fragment rendered="#{not __page__.isRenderTypeDialog}">
+					            <ui:insert name="menuLeft">
+					            	<!--
+					            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'MENU_LEFT' : __page__.sessionUser.identifier}">
+					            	-->
+						            	<div class="layout-sidebar">
+						            		<ui:insert name="menuLeftTabs">
+						            			<pa:tabMenu>
+						                			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab" >
+									                	<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">  
+							                				<h:form id="menu-form">
+							                					<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu"/>
+										                	</h:form>
+										                </pa:tab>
+									                </c:forEach>
+						           				</pa:tabMenu>
+						            		</ui:insert>
+					       				</div>
+				       				<!--
+				       				</p:cache>
+				       				-->
+					            </ui:insert>				            					            
+				            </ui:fragment>
 				            
-				            <div class="layout-main layout-main-reduce" id="contenu">
+				            <div class="layout-main layout-main-reduce" id="contenu" style="#{__page__.isRenderTypeDialog ? 'margin : 0px;padding : 0px;' : ''}">
 				                <div class="layout-main-content">
 				                	<ui:insert name="__internalLog">
 				                		<ui:fragment rendered="#{__page__.__isInternalLoggable__}">

@@ -27,25 +27,29 @@
 					
 					<ui:define name="contractBodyWithThemeInsideFormTagBodySecond">
 						<div class="layout-wrapper">
-				            <ui:insert name="menuTop">
-				            	<!--
-				            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'TOP_BAR' : __page__.sessionUser.identifier}">
-				            	-->
-				            		<ui:include src="topbar.xhtml" />
-				            	<!--
-				            	</p:cache>
-				            	-->
-				            </ui:insert>
+							<ui:fragment rendered="#{not __page__.isRenderTypeDialog}">
+								 <ui:insert name="menuTop">
+					            	<!--
+					            	<p:cache region="#{__page__.sessionUser.identifier == null ? 'TOP_BAR' : __page__.sessionUser.identifier}">
+					            	-->
+					            		<ui:include src="topbar.xhtml" />
+					            	<!--
+					            	</p:cache>
+					            	-->
+					            </ui:insert>
+							</ui:fragment>
+					        
+					        <ui:fragment rendered="#{not __page__.isRenderTypeDialog}">   				            
+					            <ui:insert name="menuLeft">
+						            <div class="layout-sidebar">
+						            	<ui:insert name="menuLeftTabs">
+						            		<ui:include src="menuLeftTabs.xhtml"/>					           				
+						            	</ui:insert>
+					       			</div>
+					            </ui:insert>				            					            
+				            </ui:fragment>
 				            
-				            <ui:insert name="menuLeft">
-					            <div class="layout-sidebar">
-					            	<ui:insert name="menuLeftTabs">
-					            		<ui:include src="menuLeftTabs.xhtml"/>					           				
-					            	</ui:insert>
-				       			</div>
-				            </ui:insert>				            					            
-				            
-				            <div class="layout-main" id="contenu">
+				            <div class="layout-main" id="contenu" style="#{__page__.isRenderTypeDialog ? 'margin : 0px;padding : 0px;' : ''}">
 				                <div class="layout-main-content">
 				                	<ui:insert name="__internalLog">
 				                		<ui:fragment rendered="#{__page__.__isInternalLoggable__}">
