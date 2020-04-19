@@ -14,6 +14,9 @@
 	width: 100% x !important;
 }
 
+.ui-cell-editor-input input{
+	color: black;
+}
 /* Select one menu */
 
 .ui-selectonemenu {
@@ -53,6 +56,14 @@
 	padding: 2px !important;
 }
 
+.cyk-datatable .ui-datatable-header{
+	padding: 0px !important;
+}
+
+.cyk-datatable .ui-toolbar {
+	padding: 0px !important;
+	border: none !important;
+}
 /* CYK */
 
 .cyk-font-weight-bold {
@@ -118,4 +129,12 @@
 
 .cyk-margin-left-10-px {
 	margin-left : 10px !important;
+}
+
+.cyk-text-align-right {
+    text-align:right !important;
+}
+
+.cyk-float-right {
+	float: right;
 }
