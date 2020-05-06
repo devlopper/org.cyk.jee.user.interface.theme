@@ -120,8 +120,21 @@
 }
 
 .cyk-background-highlight {
-	background: #ff4d4d !important;
+	background: #ff8080!important;
 }
+
+.cyk-background-highlight-gray {
+	background: #cbcbc7!important;
+}
+
+.cyk-background-gray {
+	background: gray !important;
+}
+
+.cyk-background-red {
+	background: red !important;
+}
+
 
 .cyk-margin-left-5-px {
 	margin-left : 5px !important;
