@@ -49,6 +49,7 @@ public class DesktopDefault extends AbstractThemeImpl implements Serializable {
 		__addTagLinkResourceStyleSheet__(request, "nanoscroller.css","css");
 		__addTagLinkResourceStyleSheet__(request, "animate.css","css");
 		__addTagLinkResourceStyleSheet__(request, "main.css","css");
+		__addTagLinkResourceStyleSheet__(request, "primeflex.css","primeflex");
 		
 		if(color == null)
 			color = StringUtils.substringAfter(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_PRIMEFACES), "atlantis-");
