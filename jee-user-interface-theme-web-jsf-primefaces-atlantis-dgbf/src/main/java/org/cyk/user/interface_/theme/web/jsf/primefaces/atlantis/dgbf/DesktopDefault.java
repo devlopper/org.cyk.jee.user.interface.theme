@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
+import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
+import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.bean.Property;
 import org.cyk.utility.client.controller.component.menu.Menu;
 import org.cyk.utility.client.controller.component.tab.Tab;
@@ -16,12 +18,13 @@ import ci.gouv.dgbf.sib.menu.generator.domain.MenuTab;
 
 public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.DesktopDefault implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
-			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-ACTEUR"));		
-			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu("SIIBC-MYOWNER"));
+			// "SIIBC-ACTEUR"
+			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER));		
+			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_OWNER_IDENTIFIER));
 			if(topMenuTab != null)
 				topMenu = topMenuTab.getMenuModel();	
 		}else
@@ -68,8 +71,23 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	
 	/**/
 	
+	/**/
+	
 	public static Boolean DYNAMIC_MENU = Boolean.TRUE;
 	public static Boolean IS_SHOW_USER_MENU = Boolean.TRUE;
 	public static String SYSTEM_NAME = "SIIBC";
-	public static String SYSTEM_LINK = "http://10.3.4.20:30300/sib/portail/";
+	public static String SYSTEM_LINK = "https://siib.dgbf.ci/";
+	public static String MENU_IDENTIFIER = "MENU_IDENTIFIER";
+	public static String MENU_OWNER_IDENTIFIER = "SIIBC-MYOWNER";
+	
+	public static void initialize() {
+		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
+		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
+		IS_SHOW_USER_MENU = DYNAMIC_MENU;
+		if(DYNAMIC_MENU) {
+			
+		}else {
+			SYSTEM_LINK = "#";
+		}
+	}
 }
