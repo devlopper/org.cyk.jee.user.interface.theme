@@ -11,7 +11,6 @@ import org.cyk.utility.client.controller.component.menu.MenuBuilderMapInstantiat
 import org.cyk.utility.client.controller.component.theme.ThemeColorGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
 
-import ci.gouv.dgbf.sib.menu.generator.MenuGenerator;
 import ci.gouv.dgbf.sib.menu.generator.api.service.MenuGeneratorPortailApiService;
 
 @WebListener
