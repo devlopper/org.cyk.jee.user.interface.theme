@@ -12,6 +12,9 @@ import org.cyk.utility.bean.Property;
 import org.cyk.utility.client.controller.component.menu.Menu;
 import org.cyk.utility.client.controller.component.tab.Tab;
 import org.cyk.utility.client.controller.component.tab.Tabs;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.MenuElement;
 
 import ci.gouv.dgbf.sib.menu.generator.MenuGenerator;
 import ci.gouv.dgbf.sib.menu.generator.domain.MenuTab;
@@ -22,14 +25,29 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
-			// "SIIBC-ACTEUR"
 			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER));		
 			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_OWNER_IDENTIFIER));
-			if(topMenuTab != null)
-				topMenu = topMenuTab.getMenuModel();	
+			if(topMenuTab != null) {
+				topMenu = topMenuTab.getMenuModel();
+				if(topMenu != null && CollectionHelper.isNotEmpty(topMenu.getElements())) {
+					MenuElement menuElement = topMenu.getElements().get(0);
+					if(menuElement instanceof DefaultMenuItem) {
+						DefaultMenuItem menuItem = (DefaultMenuItem) menuElement;
+						menuItem.setCommand("#{userInterfaceController.logout}");
+						menuItem.setUrl(null);
+						menuItem.setHref(null);
+					}					
+				}
+			}
+		}else if(Boolean.TRUE.equals(IS_SHOW_USER_MENU)) {
+			topMenu = new DefaultMenuModel();
+			DefaultMenuItem menuItem = new DefaultMenuItem("Se déconnecter","fa fa-log-out");
+			topMenu.addElement(menuItem);
+			menuItem.setCommand("#{userInterfaceController.logout}");
+			menuItem.setUrl(null);
+			menuItem.setHref(null);
 		}else
 			super.____buildMenu____(menuMapKey);
-		
 	}
 	
 	private Tabs __build__(List<MenuTab> tabs) {
@@ -83,7 +101,7 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	public static void initialize() {
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
 		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
-		IS_SHOW_USER_MENU = DYNAMIC_MENU;
+		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
 		if(DYNAMIC_MENU) {
 			
 		}else {

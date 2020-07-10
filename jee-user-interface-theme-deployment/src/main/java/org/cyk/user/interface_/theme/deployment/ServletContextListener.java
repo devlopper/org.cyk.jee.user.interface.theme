@@ -21,15 +21,16 @@ public class ServletContextListener extends AbstractServletContextListener imple
 	public void __initialize__(ServletContext context) {
 		super.__initialize__(context);
 		DependencyInjection.setQualifierClassTo(CustomTheme.class, MenuBuilderMapInstantiator.class,ThemeColorGetter.class);
-		MenuGeneratorPortailApiService.HOST = "10.3.4.17";
-		MenuGeneratorPortailApiService.PORT = 32300;
+		//MenuGeneratorPortailApiService.HOST = "10.3.4.17";
+		//MenuGeneratorPortailApiService.PORT = 32300;
 		
 		//MenuGenerator.BASE_URL = "http://"+context.getse;
 		
-		DesktopDefault.IS_SHOW_USER_MENU = Boolean.FALSE;
-		DesktopDefault.DYNAMIC_MENU = Boolean.TRUE;
-		DesktopDefault.MENU_IDENTIFIER = "COLB";
-		//DesktopDefault.initialize();
+		//DesktopDefault.IS_SHOW_USER_MENU = Boolean.FALSE;
+		//DesktopDefault.DYNAMIC_MENU = Boolean.TRUE;
+		//DesktopDefault.MENU_IDENTIFIER = "COLB";
+		//DesktopDefault.IS_SHOW_USER_MENU = Boolean.TRUE;
+		DesktopDefault.initialize();
 		//DesktopDefaultImpl.MENU_PATH = "/adminfaces/menu.xhtml";
 	}
 	

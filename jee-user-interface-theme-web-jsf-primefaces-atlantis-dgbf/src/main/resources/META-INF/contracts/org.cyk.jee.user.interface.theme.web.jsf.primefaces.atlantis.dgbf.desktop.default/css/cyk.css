@@ -80,6 +80,12 @@
 	padding: 0px !important;
 	border: none !important;
 }
+
+/* Tree */
+.ui-tree{
+	width: 100%;
+}
+
 /* CYK */
 
 .cyk-font-weight-bold {
@@ -216,4 +222,12 @@
 	font-size: 12px;
 	color: black;
 	font-weight:bold;
+}
+
+.cyk-ui-datatable-header-visibility-hidden .ui-datatable-header {
+	visibility: hidden;
+}
+  			
+.cyk-ui-datatable-footer-visibility-hidden tfoot {
+	visibility: hidden;
 }

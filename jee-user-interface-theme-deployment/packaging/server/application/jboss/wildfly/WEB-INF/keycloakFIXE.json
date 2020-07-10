@@ -1,0 +1,12 @@
+{
+  "realm": "Playground",
+  "auth-server-url": "http://localhost:8230/auth",
+  "ssl-required": "external",
+  "resource": "user-interface-theme",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "91aad451-110b-4d50-9d4a-0fb1b4c8610e"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}
