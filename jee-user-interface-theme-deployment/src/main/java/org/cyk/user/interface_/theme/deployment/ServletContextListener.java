@@ -5,13 +5,12 @@ import java.io.Serializable;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 
+import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.ThemeManager;
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.DesktopDefault;
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMapInstantiator;
 import org.cyk.utility.client.controller.component.theme.ThemeColorGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
-
-import ci.gouv.dgbf.sib.menu.generator.api.service.MenuGeneratorPortailApiService;
 
 @WebListener
 public class ServletContextListener extends AbstractServletContextListener implements Serializable {
@@ -20,7 +19,7 @@ public class ServletContextListener extends AbstractServletContextListener imple
 	@Override
 	public void __initialize__(ServletContext context) {
 		super.__initialize__(context);
-		DependencyInjection.setQualifierClassTo(CustomTheme.class, MenuBuilderMapInstantiator.class,ThemeColorGetter.class);
+		DependencyInjection.setQualifierClassTo(CustomTheme.class, MenuBuilderMapInstantiator.class,ThemeColorGetter.class,ThemeManager.class);
 		//MenuGeneratorPortailApiService.HOST = "10.3.4.17";
 		//MenuGeneratorPortailApiService.PORT = 32300;
 		

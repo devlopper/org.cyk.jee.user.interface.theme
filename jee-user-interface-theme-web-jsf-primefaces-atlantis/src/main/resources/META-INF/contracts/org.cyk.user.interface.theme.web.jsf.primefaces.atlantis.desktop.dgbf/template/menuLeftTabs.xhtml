@@ -5,11 +5,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pa="http://primefaces.org/atlantis">
-	
-		<style>
+		
+		<!-- 
 			.menu-pin-button {
 				display: none;
 			}
+		 -->
+		
+		<style>
+			
 			
 			.layout-submenu-title {
 				padding-left: 4px !important;
@@ -23,9 +27,9 @@
 				text-overflow: ellipsis;
 			}
 		</style>
-
+		
 		<pa:tabMenu>
-			<c:forEach items="#{__page__.window.theme.leftMenuTabs.get()}" var="tab">
+			<c:forEach items="#{themeController.getManager().getLeftMenuTabs(__page__)}" var="tab">
 				<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">
 					<h:form id="menu-form">
 						<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu" />
@@ -33,19 +37,5 @@
 				</pa:tab>
 			</c:forEach>
 		</pa:tabMenu>
-
-		<!--
-		<pa:tabMenu>
-			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab">
-				<pa:tab icon="#{menuBacking.listMenusTabs.get(0).icon}"
-					title="#{menuBacking.listMenusTabs.get(0).title}"
-					rendered="#{menuBacking.listMenusTabs.size() gt 0}">
-					<h:form>
-						<pa:menu model="#{menuBacking.listMenusTabs.get(0).menuModel}"></pa:menu>
-					</h:form>
-				</pa:tab>
-			</c:forEach>
-		</pa:tabMenu>
-		-->
-
+		
 </ui:composition>

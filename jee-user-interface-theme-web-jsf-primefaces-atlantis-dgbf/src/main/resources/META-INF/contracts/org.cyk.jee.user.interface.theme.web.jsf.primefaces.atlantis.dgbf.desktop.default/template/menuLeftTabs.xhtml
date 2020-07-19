@@ -6,26 +6,30 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pa="http://primefaces.org/atlantis">
 	
-		<style>
-			.menu-pin-button {
-				display: none;
-			}
+	<!-- 
+		.menu-pin-button {
+			display: none;
+		}
+	 -->
+	
+	<style>		
+		.layout-submenu-title {
+			padding-left: 4px !important;
+		}
 			
-			.layout-submenu-title {
-				padding-left: 4px !important;
-			}
-			
-			.layout-submenu-title span {
-				width: calc(100% - 23px);
-				overflow: hidden;
-				display: inline-block;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-			}
-		</style>
-
+		.layout-submenu-title span {
+			width: calc(100% - 23px);
+			overflow: hidden;
+			display: inline-block;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	</style>
+	
+	<c:set var="tabMenu" value="#{themeController.getManager().getLeftTabMenu(__page__)}"/>
+	<c:if test="#{tabMenu == null}">
 		<pa:tabMenu>
-			<c:forEach items="#{__page__.window.theme.leftMenuTabs.get()}" var="tab">
+			<c:forEach items="#{themeController.getManager().getLeftMenuTabs(__page__)}" var="tab">
 				<pa:tab icon="#{tab.properties.icon}" title="#{tab.properties.name}">
 					<h:form id="menu-form">
 						<pa:menu model="#{tab.properties.menu.targetModelValue}" widgetVar="menu" />
@@ -33,19 +37,22 @@
 				</pa:tab>
 			</c:forEach>
 		</pa:tabMenu>
-
-		<!--
-		<pa:tabMenu>
-			<c:forEach items="#{__page__.window.theme.menuTabs.get()}" var="tab">
-				<pa:tab icon="#{menuBacking.listMenusTabs.get(0).icon}"
-					title="#{menuBacking.listMenusTabs.get(0).title}"
-					rendered="#{menuBacking.listMenusTabs.size() gt 0}">
-					<h:form>
-						<pa:menu model="#{menuBacking.listMenusTabs.get(0).menuModel}"></pa:menu>
+	</c:if>
+	<c:if test="#{tabMenu != null}">
+		<pa:tabMenu activeIndex="#{tabMenu.activeIndex}" id="#{tabMenu.identifier}" rendered="#{tabMenu.rendered}" widgetVar="#{tabMenu.widgetVar}">
+			<c:forEach items="#{tabMenu.tabs}" var="tab">
+				<pa:tab id="#{tab.identifier}" icon="#{tab.icon}" rendered="#{tab.rendered}" title="#{tab.title}">
+					<h:form id="menu-form">
+						<pa:menu 							
+							model="#{tab.menu.model}" 
+							rendered="#{tab.menu.rendered}" 
+							styleClass="#{tab.menu.styleClass}" 
+							widgetVar="#{tab.menu.widgetVar}" 
+							style="#{tab.menu.style}" 
+						/>
 					</h:form>
 				</pa:tab>
 			</c:forEach>
 		</pa:tabMenu>
-		-->
-
+	</c:if>
 </ui:composition>

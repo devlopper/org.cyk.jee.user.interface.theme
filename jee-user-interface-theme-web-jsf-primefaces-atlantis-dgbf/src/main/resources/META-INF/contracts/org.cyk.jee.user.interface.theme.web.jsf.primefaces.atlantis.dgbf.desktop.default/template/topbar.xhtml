@@ -17,6 +17,7 @@
         
         <p:outputLabel styleClass="app-name-style">
             <!--
+            #{themeController.getManager().getLeftMenuTabs(__page__)}
             <p:link value="SIIBC" style="color: #ffffff !important;font-weight: normal !important;" href="http://10.3.4.20:30300/sib/portail/" />
             -->
             <p:link value="#{__page__.window.theme.systemName}" style="color: #ffffff !important;font-weight: normal !important;" href="#{__page__.window.theme.systemLink}" />
@@ -24,7 +25,7 @@
             
             <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px;"></i>
             <p:spacer width="6" />
-            <p:link value="#{__page__.window.getOutputStringText('applicationName').value}" style="color: #ffffff !important;font-weight: normal !important;" outcome="indexView"/>            
+            <p:link value="#{themeController.getManager().getApplicationName(__page__)}" style="color: #ffffff !important;font-weight: normal !important;" outcome="indexView"/>            
         </p:outputLabel>
        	
         <a id="topbar-menu-button" href="#">

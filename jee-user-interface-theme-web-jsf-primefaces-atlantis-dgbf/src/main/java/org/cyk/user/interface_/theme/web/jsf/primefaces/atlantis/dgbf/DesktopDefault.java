@@ -6,6 +6,7 @@ import java.util.List;
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
+import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.bean.Property;
@@ -39,15 +40,17 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 					}					
 				}
 			}
-		}else if(Boolean.TRUE.equals(IS_SHOW_USER_MENU)) {
-			topMenu = new DefaultMenuModel();
-			DefaultMenuItem menuItem = new DefaultMenuItem("Se déconnecter","fa fa-log-out");
-			topMenu.addElement(menuItem);
-			menuItem.setCommand("#{userInterfaceController.logout}");
-			menuItem.setUrl(null);
-			menuItem.setHref(null);
-		}else
+		}else {
 			super.____buildMenu____(menuMapKey);
+			if(Boolean.TRUE.equals(IS_SHOW_USER_MENU)) {
+				topMenu = new DefaultMenuModel();
+				DefaultMenuItem menuItem = new DefaultMenuItem("Se déconnecter","fa fa-log-out");
+				topMenu.addElement(menuItem);
+				menuItem.setCommand("#{userInterfaceController.logout}");
+				menuItem.setUrl(null);
+				menuItem.setHref(null);
+			}		
+		}		
 	}
 	
 	private Tabs __build__(List<MenuTab> tabs) {
@@ -107,5 +110,6 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		}else {
 			SYSTEM_LINK = "#";
 		}
+		LogHelper.logInfo("Theme initialized", DesktopDefault.class);
 	}
 }

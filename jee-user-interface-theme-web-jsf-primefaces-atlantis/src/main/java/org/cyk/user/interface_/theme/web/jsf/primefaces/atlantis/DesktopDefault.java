@@ -143,4 +143,8 @@ public class DesktopDefault extends AbstractThemeImpl implements Serializable {
 	public String getRoles() {
 		return "ROLES";
 	}
+
+	public ThemeManager getManager() {
+		return ThemeManager.getInstance();
+	}
 }
