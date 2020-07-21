@@ -25,7 +25,8 @@
             
             <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px;"></i>
             <p:spacer width="6" />
-            <p:link value="#{themeController.getManager().getApplicationName(__page__)}" style="color: #ffffff !important;font-weight: normal !important;" outcome="indexView"/>            
+            <p:link value="#{themeController.getManager().getApplicationName(__page__)}" style="color: #ffffff !important;font-weight: normal !important;" 
+            	outcome="#{themeController.getManager().getApplicationOutcome(__page__)}"/>            
         </p:outputLabel>
        	
         <a id="topbar-menu-button" href="#">

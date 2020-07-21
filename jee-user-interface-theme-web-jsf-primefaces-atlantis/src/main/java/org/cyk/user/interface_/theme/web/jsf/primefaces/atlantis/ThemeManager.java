@@ -22,7 +22,7 @@ public interface ThemeManager {
 	Boolean getIsShowUser(AbstractPageContainerManagedImpl page);
 	
 	String getApplicationName(AbstractPageContainerManagedImpl page);
-	
+	String getApplicationOutcome(AbstractPageContainerManagedImpl page);
 	String getUserNames(AbstractPageContainerManagedImpl page);
 	
 	/**/
@@ -71,6 +71,17 @@ public interface ThemeManager {
 		
 		protected String __getApplicationName__(AbstractPageContainerManagedImpl page) {
 			return page.getWindow().getOutputStringText("applicationName").getValue();
+		}
+		
+		@Override
+		public String getApplicationOutcome(AbstractPageContainerManagedImpl page) {
+			if(page == null)
+				return null;
+			return __getApplicationOutcome__(page);
+		}
+		
+		protected String __getApplicationOutcome__(AbstractPageContainerManagedImpl page) {
+			return "indexView";
 		}
 		
 		@Override
