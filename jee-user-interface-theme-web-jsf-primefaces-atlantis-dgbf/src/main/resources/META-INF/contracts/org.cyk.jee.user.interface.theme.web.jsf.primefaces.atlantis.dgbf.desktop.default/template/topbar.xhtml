@@ -32,7 +32,7 @@
             <i class="fa fa-bars"/>
         </a>
         
-        <ui:fragment rendered="#{__page__.window.theme.isShowUserMenu}">
+        <ui:fragment rendered="#{themeController.getManager().getIsShowUser(__page__)}">
         	<ul class="topbar-menu fadeInDown animated">
 	            <li class="profile-item">
 	            	<a href="#">                            
@@ -40,13 +40,13 @@
 			                <p:graphicImage name="profile-image.png" library="image" />
 			            </div>
 			            <div class="profile-info">
-			                <span class="topbar-item-name profile-name">#{__page__.session.user.names}</span>
+			                <span class="topbar-item-name profile-name">#{themeController.getManager().getUserNames(__page__)}</span>
 			            </div>
 			        </a>
 			        
 			        <ul class="animated">
 			            <h:form>
-			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{__page__.window.theme.topMenu}"/>
+			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{themeController.getManager().getTopMenuModel(__page__)}"/>
 			            </h:form>
 			        </ul>
 	            </li>

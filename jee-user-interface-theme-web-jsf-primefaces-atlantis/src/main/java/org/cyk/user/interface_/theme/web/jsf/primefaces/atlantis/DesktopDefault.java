@@ -144,7 +144,15 @@ public class DesktopDefault extends AbstractThemeImpl implements Serializable {
 		return "ROLES";
 	}
 
+	public Boolean getIsShowUserMenu() {
+		return IS_SHOW_USER_MENU;
+	}
+	
 	public ThemeManager getManager() {
 		return ThemeManager.getInstance();
 	}
+
+	/**/
+	
+	public static Boolean IS_SHOW_USER_MENU = Boolean.TRUE;
 }

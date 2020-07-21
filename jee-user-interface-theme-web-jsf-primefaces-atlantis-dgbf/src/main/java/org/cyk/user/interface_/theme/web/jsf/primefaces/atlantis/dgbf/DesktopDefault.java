@@ -86,16 +86,11 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		return SYSTEM_LINK;
 	}
 	
-	public Boolean getIsShowUserMenu() {
-		return IS_SHOW_USER_MENU;
-	}
-	
 	/**/
 	
 	/**/
 	
-	public static Boolean DYNAMIC_MENU = Boolean.TRUE;
-	public static Boolean IS_SHOW_USER_MENU = Boolean.TRUE;
+	public static Boolean DYNAMIC_MENU = Boolean.TRUE;	
 	public static String SYSTEM_NAME = "SIIBC";
 	public static String SYSTEM_LINK = "https://siib.dgbf.ci/";
 	public static String MENU_IDENTIFIER = "MENU_IDENTIFIER";
