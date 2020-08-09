@@ -3,11 +3,13 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf;
 import java.io.Serializable;
 import java.util.List;
 
+import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.annotation.DGBF;
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
+import org.cyk.utility.__kernel__.user.interface_.UserInterfaceEventListener;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.bean.Property;
 import org.cyk.utility.client.controller.component.menu.Menu;
@@ -26,6 +28,7 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
+			LogHelper.logInfo("Generating dynamic menu", getClass());
 			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER));		
 			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_OWNER_IDENTIFIER));
 			if(topMenuTab != null) {
@@ -91,17 +94,20 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	/**/
 	
 	public static Boolean DYNAMIC_MENU = Boolean.TRUE;	
-	public static String SYSTEM_NAME = "SIIBC";
-	public static String SYSTEM_LINK = "https://siib.dgbf.ci/";
+	//public static String SYSTEM_NAME = "SIIBC";
+	public static String SYSTEM_NAME = "SIGOBE";
+	public static String SYSTEM_LINK = "SYSTEM_WEB_HOME_URL";
 	public static String MENU_IDENTIFIER = "MENU_IDENTIFIER";
 	public static String MENU_OWNER_IDENTIFIER = "SIIBC-MYOWNER";
 	
 	public static void initialize() {
+		SYSTEM_NAME = ConfigurationHelper.getValueAsString("SIIBC_NAME",null,null,"SIGOBE");
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
 		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
 		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
+		SYSTEM_LINK = ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL);
 		if(DYNAMIC_MENU) {
-			
+			DependencyInjection.setQualifierClassTo(DGBF.class, UserInterfaceEventListener.class);
 		}else {
 			SYSTEM_LINK = "#";
 		}
