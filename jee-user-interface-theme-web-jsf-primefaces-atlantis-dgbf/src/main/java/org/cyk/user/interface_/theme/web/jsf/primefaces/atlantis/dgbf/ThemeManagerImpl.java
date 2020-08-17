@@ -2,11 +2,11 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.ThemeManager;
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.annotation.DGBF;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.value.ValueHelper;
-import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractPageContainerManagedImpl;
 
 @DGBF
@@ -23,8 +23,10 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 	
 	@Override
 	protected String __getSystemLink__(AbstractPageContainerManagedImpl page) {
-		if(systemLink == null)
-			systemLink = ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL),"http://siibtest.dgbf.ci");	
+		if(systemLink == null) {
+			String environment = ConfigurationHelper.getValueAsString("SIIB_ENVIRONMENT");
+			systemLink = StringUtils.equalsIgnoreCase(environment, "default") ? "http://siib.dgbf.ci" : "http://siibtest.dgbf.ci";
+		}
 		return systemLink;
 	}
 }
