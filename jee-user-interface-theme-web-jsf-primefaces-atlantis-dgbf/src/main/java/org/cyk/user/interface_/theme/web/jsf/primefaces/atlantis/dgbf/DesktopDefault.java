@@ -11,6 +11,7 @@ import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.user.interface_.UserInterfaceEventListener;
+import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.bean.Property;
 import org.cyk.utility.client.controller.component.menu.Menu;
@@ -93,10 +94,10 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	public static String MENU_IDENTIFIER = "MENU_IDENTIFIER";
 	public static String MENU_OWNER_IDENTIFIER = "SIIBC-MYOWNER";
 	
-	public static void initialize() {
+	public static void initialize(Class<?> themeManagerQualifierClass,Class<?> userInterfaceEventListenerQualifierClass) {
 		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);
 		
-		DependencyInjection.setQualifierClassTo(DGBF.class, ThemeManager.class);
+		DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(themeManagerQualifierClass, DGBF.class), ThemeManager.class);
 				
 		//SYSTEM_NAME = ConfigurationHelper.getValueAsString("SIIBC_NAME",null,null,"SIGOBE");
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
@@ -104,10 +105,14 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
 		//SYSTEM_LINK = ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL,null,null,"http://siib.dgbf.ci");
 		if(DYNAMIC_MENU) {
-			DependencyInjection.setQualifierClassTo(DGBF.class, UserInterfaceEventListener.class);
+			DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(userInterfaceEventListenerQualifierClass,DGBF.class), UserInterfaceEventListener.class);
 		}else {
 			//SYSTEM_LINK = "#";
 		}
 		LogHelper.logInfo("Theme initialized", DesktopDefault.class);
+	}
+	
+	public static void initialize() {
+		initialize(null, null);
 	}
 }

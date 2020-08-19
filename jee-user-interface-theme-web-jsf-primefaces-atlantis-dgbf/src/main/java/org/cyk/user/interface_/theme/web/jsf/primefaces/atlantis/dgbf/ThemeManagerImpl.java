@@ -12,7 +12,7 @@ import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractPageContaine
 @DGBF
 public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Serializable {
 
-	private String systemName,systemLink;
+	protected String systemName,systemLink;
 	
 	@Override
 	protected String __getSystemName__(AbstractPageContainerManagedImpl page) {
