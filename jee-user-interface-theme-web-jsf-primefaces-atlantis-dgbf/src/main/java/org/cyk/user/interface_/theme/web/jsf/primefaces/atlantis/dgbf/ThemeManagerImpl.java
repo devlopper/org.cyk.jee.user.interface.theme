@@ -17,16 +17,19 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 	@Override
 	protected String __getSystemName__(AbstractPageContainerManagedImpl page) {
 		if(systemName == null)
-			systemName = ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString("SIIBC_NAME"),"SIGOBE");
+			systemName = ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(EnvironmentVariableName.NAME.getValue()),"SIGOBE");
 		return systemName;
 	}
 	
 	@Override
 	protected String __getSystemLink__(AbstractPageContainerManagedImpl page) {
-		if(systemLink == null) {
-			String environment = ConfigurationHelper.getValueAsString("SIIB_ENVIRONMENT");
-			systemLink = StringUtils.equalsIgnoreCase(environment, "default") ? "http://siib.dgbf.ci" : "http://siibtest.dgbf.ci";
-		}
+		if(systemLink == null)
+			systemLink = getSystemLink();
 		return systemLink;
+	}
+	
+	public static String getSystemLink() {
+		String environment = ConfigurationHelper.getValueAsString(EnvironmentVariableName.ENVIRONMENT.getValue());
+		return StringUtils.equalsIgnoreCase(environment, "default") ? "https://siib.dgbf.ci/" : "https://siibtest.dgbf.ci/";
 	}
 }

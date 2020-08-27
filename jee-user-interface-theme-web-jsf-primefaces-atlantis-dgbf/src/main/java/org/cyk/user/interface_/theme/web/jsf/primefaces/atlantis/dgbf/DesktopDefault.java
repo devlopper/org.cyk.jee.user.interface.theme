@@ -12,6 +12,7 @@ import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.user.interface_.UserInterfaceEventListener;
 import org.cyk.utility.__kernel__.value.ValueHelper;
+import org.cyk.utility.__kernel__.variable.VariableHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.bean.Property;
 import org.cyk.utility.client.controller.component.menu.Menu;
@@ -95,10 +96,9 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	public static String MENU_OWNER_IDENTIFIER = "SIIBC-MYOWNER";
 	
 	public static void initialize(Class<?> themeManagerQualifierClass,Class<?> userInterfaceEventListenerQualifierClass) {
-		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);
-		
+		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);		
 		DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(themeManagerQualifierClass, DGBF.class), ThemeManager.class);
-				
+		VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, ThemeManagerImpl.getSystemLink());		
 		//SYSTEM_NAME = ConfigurationHelper.getValueAsString("SIIBC_NAME",null,null,"SIGOBE");
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
 		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
