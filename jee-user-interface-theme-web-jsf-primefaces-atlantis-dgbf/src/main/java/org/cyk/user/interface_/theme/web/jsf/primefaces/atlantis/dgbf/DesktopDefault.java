@@ -10,6 +10,7 @@ import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
+import org.cyk.utility.__kernel__.session.SessionHelper;
 import org.cyk.utility.__kernel__.user.interface_.UserInterfaceEventListener;
 import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableHelper;
@@ -32,8 +33,24 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
 			LogHelper.logInfo("Generating dynamic menu identified by "+MENU_IDENTIFIER, getClass());
-			leftMenuTabs = __build__(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER));		
-			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateServiceMenu(MENU_OWNER_IDENTIFIER));
+			List<MenuTab> menuTabs = __inject__(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER,SessionHelper.getUserName());
+			if(CollectionHelper.isNotEmpty(menuTabs)) {
+				MenuTab menuTab = CollectionHelper.getFirst(menuTabs);
+				if(menuTab != null) {
+					if(CollectionHelper.isNotEmpty(menuTab.getMenuModel().getElements())) {
+						MenuElement menuElement = menuTab.getMenuModel().getElements().get(0);
+						if(menuElement instanceof DefaultMenuItem) {
+							DefaultMenuItem menuItem = (DefaultMenuItem) menuElement;
+							menuItem.setOutcome("indexView");
+							menuItem.setCommand(null);
+							menuItem.setUrl(null);						
+						}
+					}
+				}
+			}
+			leftMenuTabs = __build__(menuTabs);		
+			
+			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateAccountMenu());
 			if(topMenuTab != null) {
 				topMenu = topMenuTab.getMenuModel();
 				if(topMenu != null && CollectionHelper.isNotEmpty(topMenu.getElements())) {
@@ -99,11 +116,9 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);		
 		DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(themeManagerQualifierClass, DGBF.class), ThemeManager.class);
 		VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, ThemeManagerImpl.getSystemLink());		
-		//SYSTEM_NAME = ConfigurationHelper.getValueAsString("SIIBC_NAME",null,null,"SIGOBE");
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
 		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
 		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
-		//SYSTEM_LINK = ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL,null,null,"http://siib.dgbf.ci");
 		if(DYNAMIC_MENU) {
 			DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(userInterfaceEventListenerQualifierClass,DGBF.class), UserInterfaceEventListener.class);
 		}else {

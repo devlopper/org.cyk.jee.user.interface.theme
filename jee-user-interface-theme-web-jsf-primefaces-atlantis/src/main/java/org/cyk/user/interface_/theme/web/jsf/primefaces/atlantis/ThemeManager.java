@@ -8,6 +8,7 @@ import org.cyk.utility.__kernel__.Helper;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.object.__static__.identifiable.AbstractObject;
+import org.cyk.utility.__kernel__.session.SessionHelper;
 import org.cyk.utility.__kernel__.string.StringHelper;
 import org.cyk.utility.__kernel__.value.Value;
 import org.cyk.utility.client.controller.component.tab.Tab;
@@ -22,6 +23,8 @@ public interface ThemeManager {
 	MenuModel getTopMenuModel(AbstractPageContainerManagedImpl page);
 	
 	Boolean getIsShowUser(AbstractPageContainerManagedImpl page);
+	
+	Object getPropertyValue(AbstractPageContainerManagedImpl page,Object name);
 	
 	String getApplicationName(AbstractPageContainerManagedImpl page);
 	String getApplicationOutcome(AbstractPageContainerManagedImpl page);
@@ -139,6 +142,17 @@ public interface ThemeManager {
 				return page.getSession().getUser().getName();
 			return page.getSession().getUser().getNames();
 		}
+		
+		@Override
+		public Object getPropertyValue(AbstractPageContainerManagedImpl page, Object name) {
+			if(page == null)
+				return null;
+			return __getPropertyValue__(page,name);
+		}
+		
+		protected Object __getPropertyValue__(AbstractPageContainerManagedImpl page,Object name) {
+			return SessionHelper.getAttributeValue(name);
+		}
 	}
 	
 	/**/
@@ -147,5 +161,5 @@ public interface ThemeManager {
 		return Helper.getInstance(ThemeManager.class, INSTANCE);
 	}
 	
-	Value INSTANCE = new Value();	
+	Value INSTANCE = new Value();
 }

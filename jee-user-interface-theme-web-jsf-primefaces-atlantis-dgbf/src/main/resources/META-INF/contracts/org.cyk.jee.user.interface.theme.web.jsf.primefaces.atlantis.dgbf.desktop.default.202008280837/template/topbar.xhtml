@@ -1,0 +1,104 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"  
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/atlantis"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
+    
+    <div class="topbar" >
+        <div class="logo">
+        	<ui:insert name="topBarLogo">
+        		<cyk:image value="#{__page__.window.theme.logo}" />
+        	</ui:insert>
+        </div>
+        
+        <p:outputLabel styleClass="app-name-style">
+            <!--
+            #{themeController.getManager().getLeftMenuTabs(__page__)}
+            <p:link value="SIIBC" style="color: #ffffff !important;font-weight: normal !important;" href="http://10.3.4.20:30300/sib/portail/" />
+            -->
+            
+            <p:link value="#{themeController.getManager().getSystemName(__page__)}" style="color: #ffffff !important;font-weight: normal !important;" 
+            	href="#{themeController.getManager().getSystemLink(__page__)}" />
+            
+            <p:spacer width="2" />
+            
+            <i class="fa fa-caret-right" style="font-size: 20px; margin-top: -1px;"></i>
+            <p:spacer width="6" />
+            
+            <p:link value="#{themeController.getManager().getApplicationName(__page__)}" style="color: #ffffff !important;font-weight: normal !important;" 
+            	outcome="#{themeController.getManager().getApplicationOutcome(__page__)}"/>            
+            
+        </p:outputLabel>
+       	
+        <a id="topbar-menu-button" href="#">
+            <i class="fa fa-bars"/>
+        </a>
+        
+        <ui:fragment rendered="#{themeController.getManager().getIsShowUser(__page__)}">
+        	<ul class="topbar-menu fadeInDown animated">
+	             <li class="profile-item">
+			        <a href="#">                            
+			            <div class="profile-image">
+			                <!--<p:graphicImage name="images/profile-image.png" library="atlantis-layout" />-->
+			                <pe:letterAvatar value="#{micBacking.getToken(request).name}" rounded="true"/>
+			            </div>
+			            <div class="profile-info">
+			                <span class="topbar-item-name profile-name">#{themeController.getManager().getUserNames(__page__)}</span>
+			                <!--
+			                <span class="topbar-item-name profile-role">#{themeController.getManager().getUserFunction(__page__)}</span>
+			                -->
+			            </div>
+			        </a>
+			        <!--
+			        <ul class="animated">
+			            <h:form>
+			                <div class="profile-menu-image">
+			                    <p:graphicImage name="images/profile-image.png" library="atlantis-layout" />
+			                </div>
+			                <p:spacer height="10" width="0"/>
+			                <div class="text-centered" style="margin: 0px 4px">
+			                    <b style="font-size: 1.3em; margin-bottom: 10px;">#{micBacking.getToken(request).name}</b>
+			                    <br/>
+			                    <b>#{micBacking.user.electronicMailAddress}</b>
+			                    <br/>
+			                    <span>#{micBacking.user.fonction}</span>			                    
+			                    <br/>
+			                    <span style="font-size: 10px">#{micBacking.user.administrativeUnitAsString}</span>
+			                </div>
+			                <p:spacer height="10" width="0"/>
+			                <div class="text-centered" style="margin: 0px 4px">
+			                    <p:button value="Gérer votre compte SIGOBE" styleClass="moncompte-btn" target="_blank" href="#{micBacking.getAccountUri()}"/>
+			                </div>
+			                <p:spacer height="10" width="0"/>
+			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none !important; padding-left: 0px;" model="#{menuBacking.accountMenuModel}"/>
+			            </h:form>
+			        </ul>
+			        -->
+			    </li>
+	            <!--
+	            <li class="profile-item">
+	            	<a href="#">                            
+			            <div class="profile-image">
+			                <p:graphicImage name="profile-image.png" library="image" />
+			            </div>
+			            <div class="profile-info">
+			                <span class="topbar-item-name profile-name">#{themeController.getManager().getUserNames(__page__)}</span>
+			            </div>
+			        </a>
+			        
+			        <ul class="animated">
+			            <h:form>
+			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none; padding-left: 0px;" model="#{themeController.getManager().getTopMenuModel(__page__)}"/>
+			            </h:form>
+			        </ul>
+	            </li>
+	            -->
+	        </ul>
+        </ui:fragment>  
+    </div>
+</ui:composition>

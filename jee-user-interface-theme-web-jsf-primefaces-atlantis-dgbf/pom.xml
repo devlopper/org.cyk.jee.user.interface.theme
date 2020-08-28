@@ -24,7 +24,13 @@
 		<dependency>
             <groupId>ci.gouv.dgbf</groupId>
             <artifactId>sib-menu-generator</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.6</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ci.gouv.dgbf.utility</groupId>
+			<artifactId>dgbf-utility</artifactId>
+			<version>0.0.1</version>
         </dependency>
 	</dependencies>
 	

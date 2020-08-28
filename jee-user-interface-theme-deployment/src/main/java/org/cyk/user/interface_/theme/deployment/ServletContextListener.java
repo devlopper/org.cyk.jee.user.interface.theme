@@ -15,6 +15,7 @@ import org.cyk.utility.client.controller.component.theme.ThemeColorGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
 
 import ci.gouv.dgbf.sib.menu.generator.api.service.MenuGeneratorPortailApiService;
+import ci.gouv.dgbf.utility.Actor;
 
 @WebListener
 public class ServletContextListener extends AbstractServletContextListener implements Serializable {
@@ -25,16 +26,15 @@ public class ServletContextListener extends AbstractServletContextListener imple
 		super.__initialize__(context);
 		DependencyInjection.setQualifierClassTo(CustomTheme.class, MenuBuilderMapInstantiator.class,ThemeColorGetter.class,ThemeManager.class);
 		
+		Actor.HOST = "10.3.4.17";
+		Actor.PORT = 30055;
+		
 		MenuGeneratorPortailApiService.HOST = "10.3.4.17";
 		MenuGeneratorPortailApiService.PORT = 32300;
-		
-		//VariableHelper.write("SIIBC_NAME", "SIGOBE");
-		//VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, "http://siibtest.dgbf.ci");
-		
 		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER, "SIIBC-ACTEUR");
-		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC, Boolean.TRUE);
-		
+		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC, Boolean.TRUE);		
 		DesktopDefault.initialize();
+		
 		//DesktopDefaultImpl.MENU_PATH = "/adminfaces/menu.xhtml";
 	}
 	

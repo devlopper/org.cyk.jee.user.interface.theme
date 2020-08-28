@@ -6,6 +6,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pa="http://primefaces.org/atlantis"
+    xmlns:pe="http://primefaces.org/ui/extensions"
     xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
     
     <div class="topbar" >
@@ -40,6 +41,51 @@
         
         <ui:fragment rendered="#{themeController.getManager().getIsShowUser(__page__)}">
         	<ul class="topbar-menu fadeInDown animated">
+	             <li class="profile-item">
+			        <a href="#">                            
+			            <div class="profile-image">
+			                <!--<p:graphicImage name="images/profile-image.png" library="atlantis-layout" />-->
+			                <pe:letterAvatar value="#{themeController.getManager().getPropertyValue(__page__,'SESSION_USER_NAMES')}" rounded="true"/>
+			            </div>
+			            <div class="profile-info">
+			                <span class="topbar-item-name profile-name">#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_NAMES")}</span>
+			                <!--
+			                <span class="topbar-item-name profile-role">#{themeController.getManager().getUserFunction(__page__)}</span>
+			                -->
+			            </div>
+			        </a>
+			        
+			        <ul class="animated">
+			            <h:form>
+			                <div class="profile-menu-image">
+			                    <p:graphicImage name="images/profile-image.png" library="atlantis-layout" />
+			                </div>
+			                <p:spacer height="10" width="0"/>
+			                <div class="text-centered" style="margin: 0px 4px">
+			                    <b style="font-size: 1.3em; margin-bottom: 10px;">#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_NAME")}</b>
+			                    <!--
+			                    <br/>
+			                    <b>#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_ELECTRONIC_MAIL_ADDRESS")}</b>
+			                    -->
+			                    <br/>
+			                    <span>#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_SECTION")}</span>	
+			                    <br/>
+			                    <span>#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_ADMINISTRATIVE_UNIT")}</span>			                    
+			                    <br/>
+			                    <span style="font-size: 10px">#{themeController.getManager().getPropertyValue(__page__,"SESSION_USER_ADMINISTRATIVE_FUNCTION")}</span>
+			                </div>
+			                <p:spacer height="10" width="0"/>
+			                <div class="text-centered" style="margin: 0px 4px">
+			                    <p:button value="Gérer votre compte SIGOBE" styleClass="moncompte-btn" target="_blank" href="MON_COMPTE_URI"/>
+			                </div>
+			                <!--
+			                <p:spacer height="10" width="0"/>
+			                <pa:menu id="account-menu" widgetVar="user-menu" style="list-style: none !important; padding-left: 0px;" model="#{themeController.getManager().getTopMenuModel(__page__)}"/>
+			                -->
+			            </h:form>
+			        </ul>			        
+			    </li>
+	            <!--
 	            <li class="profile-item">
 	            	<a href="#">                            
 			            <div class="profile-image">
@@ -56,6 +102,7 @@
 			            </h:form>
 			        </ul>
 	            </li>
+	            -->
 	        </ul>
         </ui:fragment>  
     </div>
