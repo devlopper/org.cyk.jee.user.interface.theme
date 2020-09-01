@@ -14,8 +14,7 @@ import org.cyk.utility.client.controller.component.menu.MenuBuilderMapInstantiat
 import org.cyk.utility.client.controller.component.theme.ThemeColorGetter;
 import org.cyk.utility.client.deployment.AbstractServletContextListener;
 
-import ci.gouv.dgbf.sib.menu.generator.api.service.MenuGeneratorPortailApiService;
-import ci.gouv.dgbf.utility.Actor;
+import ci.gouv.dgbf.utility.Helper;
 
 @WebListener
 public class ServletContextListener extends AbstractServletContextListener implements Serializable {
@@ -26,15 +25,24 @@ public class ServletContextListener extends AbstractServletContextListener imple
 		super.__initialize__(context);
 		DependencyInjection.setQualifierClassTo(CustomTheme.class, MenuBuilderMapInstantiator.class,ThemeColorGetter.class,ThemeManager.class);
 		
-		Actor.HOST = "10.3.4.17";
-		Actor.PORT = 30055;
+		//Actor.HOST = "10.3.4.17";
+		//Actor.PORT = 30055;
 		
+		/*
+		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC, Boolean.TRUE);
 		MenuGeneratorPortailApiService.HOST = "10.3.4.17";
 		MenuGeneratorPortailApiService.PORT = 32300;
-		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER, "SIIBC-ACTEUR");
-		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC, Boolean.TRUE);		
-		DesktopDefault.initialize();
+		*/
 		
+		VariableHelper.write(Helper.getApiHostVariableName("acteur"),"localhost");
+		VariableHelper.write(Helper.getApiPortVariableName("acteur"),"3000");
+		
+		//ActeurApiService.HOST = ci.gouv.dgbf.utility.Helper.getApiHost("acteur");
+		//ActeurApiService.PORT = ci.gouv.dgbf.utility.Helper.getApiPort("acteur");
+		
+		VariableHelper.write(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER, "SIIBC-ACTEUR");
+		
+		DesktopDefault.initialize();		
 		//DesktopDefaultImpl.MENU_PATH = "/adminfaces/menu.xhtml";
 	}
 	

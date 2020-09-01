@@ -24,6 +24,7 @@ import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuElement;
 
 import ci.gouv.dgbf.sib.menu.generator.MenuGenerator;
+import ci.gouv.dgbf.sib.menu.generator.api.service.ActeurApiService;
 import ci.gouv.dgbf.sib.menu.generator.domain.MenuTab;
 
 public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.DesktopDefault implements Serializable {
@@ -121,6 +122,9 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
 		if(DYNAMIC_MENU) {
 			DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(userInterfaceEventListenerQualifierClass,DGBF.class), UserInterfaceEventListener.class);
+			
+			ActeurApiService.HOST = ci.gouv.dgbf.utility.Helper.getApiHost("acteur");
+			ActeurApiService.PORT = ci.gouv.dgbf.utility.Helper.getApiPort("acteur");
 		}else {
 			//SYSTEM_LINK = "#";
 		}
