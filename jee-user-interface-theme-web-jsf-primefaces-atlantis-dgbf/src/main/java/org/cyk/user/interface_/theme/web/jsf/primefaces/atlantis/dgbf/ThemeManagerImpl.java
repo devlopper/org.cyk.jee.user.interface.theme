@@ -49,6 +49,8 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 			return actor.getAdministrativeUnit();
 		if(PropertyName.SESSION_USER_ADMINISTRATIVE_FUNCTION.name().equals(name))
 			return actor.getAdministrativeFunction();
+		if(PropertyName.SESSION_USER_VISIBLE_SECTIONS.name().equals(name))
+			return actor.getVisibleSections();
 		if(PropertyName.MANAGE_MY_ACCOUNT_URL.name().equals(name))
 			return getSystemLink()+"sib/acteur/mon_compte";
 		return super.__getPropertyValue__(page, name);
@@ -67,7 +69,7 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 			return actor;
 		if(StringHelper.isBlank(SessionHelper.getUserName()))
 			return null;
-		SessionHelper.setAttributeValue(Actor.class, actor = Actor.getInformations(SessionHelper.getUserName()));
+		SessionHelper.setAttributeValue(Actor.class, actor = Actor.getInformationsAndVisibilities(SessionHelper.getUserName()));
 		return actor;
 	}
 	
@@ -79,6 +81,7 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 		,SESSION_USER_ADMINISTRATIVE_FUNCTION
 		,SESSION_USER_ADMINISTRATIVE_UNIT
 		,SESSION_USER_PHOTO
+		,SESSION_USER_VISIBLE_SECTIONS
 		,MANAGE_MY_ACCOUNT_URL
 		;
 	}
