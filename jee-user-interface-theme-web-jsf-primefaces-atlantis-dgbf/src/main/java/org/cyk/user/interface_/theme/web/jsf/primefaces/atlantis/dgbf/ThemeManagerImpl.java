@@ -52,13 +52,15 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 		if(PropertyName.SESSION_USER_VISIBLE_SECTIONS.name().equals(name))
 			return actor.getVisibleSections();
 		if(PropertyName.MANAGE_MY_ACCOUNT_URL.name().equals(name))
-			return getSystemLink()+"sib/acteur/mon_compte";
+			return getSystemLink()+"acteur/mon_compte";
 		return super.__getPropertyValue__(page, name);
 	}
 	
 	/**/
 	
 	public static String getSystemLink() {
+		if(StringHelper.isNotBlank(SYSTEM_LINK))
+			return SYSTEM_LINK;
 		String environment = ConfigurationHelper.getValueAsString(EnvironmentVariableName.ENVIRONMENT.getValue());
 		return StringUtils.equalsIgnoreCase(environment, "default") ? "https://siib.dgbf.ci/" : "https://siibtest.dgbf.ci/";
 	}
@@ -85,4 +87,6 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 		,MANAGE_MY_ACCOUNT_URL
 		;
 	}
+	
+	public static String SYSTEM_LINK;
 }

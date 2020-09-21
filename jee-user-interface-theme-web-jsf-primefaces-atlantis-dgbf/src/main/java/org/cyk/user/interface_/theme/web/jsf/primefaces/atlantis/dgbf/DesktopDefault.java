@@ -3,6 +3,7 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.ThemeManager;
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.annotation.DGBF;
 import org.cyk.utility.__kernel__.DependencyInjection;
@@ -11,6 +12,7 @@ import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.session.SessionHelper;
+import org.cyk.utility.__kernel__.string.StringHelper;
 import org.cyk.utility.__kernel__.user.interface_.UserInterfaceEventListener;
 import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableHelper;
@@ -30,11 +32,18 @@ import ci.gouv.dgbf.sib.menu.generator.domain.MenuTab;
 public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.DesktopDefault implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	public static String CONTEXT_PATH;
+	
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
 			LogHelper.logInfo("Generating dynamic menu identified by "+MENU_IDENTIFIER, getClass());
-			List<MenuTab> menuTabs = __inject__(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER,SessionHelper.getUserName());
+			String contextPath = StringHelper.isBlank(CONTEXT_PATH) ? ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_CONTEXT)
+					,ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_IDENTIFIER),"CONTEXTPATH")) : CONTEXT_PATH;
+			if(!StringUtils.startsWith(contextPath, "/"))
+				contextPath = "/"+contextPath;
+			LogHelper.logInfo("Context path : "+contextPath, getClass());
+			List<MenuTab> menuTabs = __inject__(MenuGenerator.class).generateServiceMenu(MENU_IDENTIFIER,SessionHelper.getUserName(),contextPath);
 			if(CollectionHelper.isNotEmpty(menuTabs)) {
 				MenuTab menuTab = CollectionHelper.getFirst(menuTabs);
 				if(menuTab != null) {

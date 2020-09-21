@@ -113,7 +113,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>all</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>${web-app.security-constraint.web-resource-collection.all.url-pattern}</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>*</role-name>

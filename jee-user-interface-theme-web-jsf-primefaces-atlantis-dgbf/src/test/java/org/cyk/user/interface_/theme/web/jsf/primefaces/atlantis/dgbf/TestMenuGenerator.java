@@ -11,7 +11,7 @@ public class TestMenuGenerator {
 		Weld weld = new Weld();
 	    weld.initialize();
 		MenuGenerator menuGenerator = DependencyInjection.inject(MenuGenerator.class);
-		System.out.println(menuGenerator.generateServiceMenu("COLB","username"));
+		System.out.println(menuGenerator.generateServiceMenu("COLB","username","acteur"));
 		weld.shutdown();
 	}
 	
