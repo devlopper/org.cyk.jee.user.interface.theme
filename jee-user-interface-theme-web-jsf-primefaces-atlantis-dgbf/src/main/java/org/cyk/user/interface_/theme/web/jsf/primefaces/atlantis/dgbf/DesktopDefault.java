@@ -125,7 +125,9 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	public static void initialize(Class<?> themeManagerQualifierClass,Class<?> userInterfaceEventListenerQualifierClass) {
 		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);		
 		DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(themeManagerQualifierClass, DGBF.class), ThemeManager.class);
-		VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, ThemeManagerImpl.getSystemLink());		
+		//SYSTEM_LINK = ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL);
+		if(StringHelper.isBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL)))
+			VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, ThemeManagerImpl.getSystemLink());		
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
 		DYNAMIC_MENU = ConfigurationHelper.is(VariableName.USER_INTERFACE_THEME_MENU_IS_DYNAMIC);
 		IS_SHOW_USER_MENU = ConfigurationHelper.is(VariableName.SECURITY_AUTHENTICATION_ENABLE);
