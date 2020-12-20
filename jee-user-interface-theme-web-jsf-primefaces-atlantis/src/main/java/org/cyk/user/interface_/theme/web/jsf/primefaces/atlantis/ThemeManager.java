@@ -3,12 +3,16 @@ package org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.model.TabMenu;
 import org.cyk.utility.__kernel__.Helper;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.object.__static__.identifiable.AbstractObject;
 import org.cyk.utility.__kernel__.session.SessionHelper;
+import org.cyk.utility.__kernel__.session.SessionManager;
 import org.cyk.utility.__kernel__.string.StringHelper;
 import org.cyk.utility.__kernel__.value.Value;
 import org.cyk.utility.client.controller.component.tab.Tab;
@@ -121,8 +125,12 @@ public interface ThemeManager {
 		
 		@Override
 		public Boolean getIsShowUser(AbstractPageContainerManagedImpl page) {
-			if(page == null || page.getSession() == null || page.getSession().getUser() == null /*&& StringHelper.isNotBlank(page.getSession().getUser().)*/)
+			if(page == null)
 				return null;
+			if(!Boolean.TRUE.equals(SessionManager.getInstance().isUserLogged((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest())))
+				return null;
+			//if(page == null || page.getSession() == null || page.getSession().getUser() == null /*&& StringHelper.isNotBlank(page.getSession().getUser().)*/)
+			//	return null;
 			return __getIsShowUser__(page);
 		}
 		
