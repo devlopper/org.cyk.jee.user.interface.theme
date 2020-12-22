@@ -4,9 +4,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
+import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
+import org.cyk.utility.__kernel__.session.SessionHelper;
+import org.cyk.utility.__kernel__.session.SessionManager;
 import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.MenuBuilder;
@@ -68,11 +74,22 @@ public class DesktopDefault extends AbstractThemeImpl implements Serializable {
 	
 	@Override
 	protected void __buildMenu__(Object menuMapKey) {
-		leftMenuTabs = menuMapKeys.get(menuMapKey);
-		if(leftMenuTabs != null)
-			return;			
+		if(!Boolean.TRUE.equals(__isMenuBuildable__(menuMapKey)))
+			return;		
 		____buildMenu____(menuMapKey);
 		menuMapKeys.put(menuMapKey, leftMenuTabs);
+	}
+	
+	protected Boolean __isMenuBuildable__(Object menuMapKey) {
+		Boolean userLoggedPrevious = ValueHelper.defaultToIfNull((Boolean) SessionHelper.getAttributeValue("userlogged"),Boolean.FALSE);
+		Boolean userLoggedActual = ValueHelper.defaultToIfNull(SessionManager.getInstance().isUserLogged((HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest()),Boolean.FALSE);		
+		if((!userLoggedPrevious && userLoggedActual) || (userLoggedPrevious && !userLoggedActual)) {
+			LogHelper.logInfo(String.format("Building menu with key %s. previously logged : %s , currently logged : %s",menuMapKey,userLoggedPrevious,userLoggedActual), getClass());
+			SessionHelper.setAttributeValue("userlogged", userLoggedActual);
+			return Boolean.TRUE;
+		}
+		return menuMapKeys.get(menuMapKey) == null;
 	}
 	
 	protected void ____buildMenu____(Object menuMapKey) {
