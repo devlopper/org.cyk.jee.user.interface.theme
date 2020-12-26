@@ -231,3 +231,7 @@
 .cyk-ui-datatable-footer-visibility-hidden tfoot {
 	visibility: hidden;
 }
+
+.cyk-image-window img {
+	border: 1px solid black;
+}
