@@ -1,8 +1,17 @@
 /*padding*/
 
 .cyk-padding-0{
- 	padding: 0px;
- }
+	padding: 0px;
+}
+.cyk-padding-1{
+	padding: 1px;
+}
+.cyk-padding-2{
+	padding: 2px;
+}
+.cyk-padding-3{
+	padding: 3px;
+}
  .cyk-margin-0{
  	margin: 0px;
  }
@@ -233,5 +242,18 @@
 }
 
 .cyk-image-window img {
-	border: 1px solid black;
+	
+}
+
+.cyk-layout-labelvalue {
+	padding: 0px;
+}
+
+.cyk-layout-labelvalue-label {
+	font-weight: bold;
+	text-align: right;
+}
+
+.cyk-layout-labelvalue-value {
+	
 }
