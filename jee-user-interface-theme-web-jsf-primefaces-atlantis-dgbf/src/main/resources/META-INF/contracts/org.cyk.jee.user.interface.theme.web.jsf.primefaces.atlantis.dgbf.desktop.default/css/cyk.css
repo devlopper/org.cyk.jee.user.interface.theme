@@ -97,6 +97,12 @@
 
 /* CYK */
 
+.cyk-input-description{
+	font-style: italic;
+	color: blue;
+	
+}
+
 .cyk-font-weight-bold {
 	font-weight : bold !important;
 }
