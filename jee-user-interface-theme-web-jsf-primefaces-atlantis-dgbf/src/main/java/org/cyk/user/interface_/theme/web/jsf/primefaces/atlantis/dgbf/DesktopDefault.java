@@ -37,6 +37,7 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	@Override
 	protected void ____buildMenu____(Object menuMapKey) {
 		if(Boolean.TRUE.equals(DYNAMIC_MENU)) {
+			/*
 			LogHelper.logInfo("Generating dynamic menu identified by "+MENU_IDENTIFIER, getClass());
 			String contextPath = StringHelper.isBlank(CONTEXT_PATH) ? ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_CONTEXT)
 					,ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_IDENTIFIER),"CONTEXTPATH")) : CONTEXT_PATH;
@@ -59,6 +60,8 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 				}
 			}
 			leftMenuTabs = __build__(menuTabs);		
+			*/
+			leftMenuTabs = buildMenuTabsByIdentifier(MENU_IDENTIFIER, getClass());
 			
 			MenuTab topMenuTab = CollectionHelper.getFirst(DependencyInjection.inject(MenuGenerator.class).generateAccountMenu());
 			if(topMenuTab != null) {
@@ -86,7 +89,32 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		}		
 	}
 	
-	private Tabs __build__(List<MenuTab> tabs) {
+	public static Tabs buildMenuTabsByIdentifier(String identifier,Class<?> klass) {
+		LogHelper.logInfo("Generating dynamic menu identified by "+identifier, klass);
+		String contextPath = StringHelper.isBlank(CONTEXT_PATH) ? ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_CONTEXT)
+				,ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_IDENTIFIER),"CONTEXTPATH")) : CONTEXT_PATH;
+		if(!StringUtils.startsWith(contextPath, "/"))
+			contextPath = "/"+contextPath;
+		LogHelper.logInfo("Context path : "+contextPath, klass);
+		List<MenuTab> menuTabs = __inject__(MenuGenerator.class).generateServiceMenu(identifier,SessionHelper.getUserName(),contextPath);
+		if(CollectionHelper.isNotEmpty(menuTabs)) {
+			MenuTab menuTab = CollectionHelper.getFirst(menuTabs);
+			if(menuTab != null) {
+				if(CollectionHelper.isNotEmpty(menuTab.getMenuModel().getElements())) {
+					MenuElement menuElement = menuTab.getMenuModel().getElements().get(0);
+					if(menuElement instanceof DefaultMenuItem) {
+						DefaultMenuItem menuItem = (DefaultMenuItem) menuElement;
+						menuItem.setOutcome("indexView");
+						menuItem.setCommand(null);
+						menuItem.setUrl(null);						
+					}
+				}
+			}
+		}
+		return __build__(menuTabs);
+	}
+	
+	private static Tabs __build__(List<MenuTab> tabs) {
 		if(CollectionHelper.isEmpty(tabs))
 			return null;
 		Tabs __tabs__ = __inject__(Tabs.class);
