@@ -62,8 +62,8 @@ public class ThemeManagerImpl extends ThemeManager.AbstractImpl implements Seria
 		if(StringHelper.isNotBlank(SYSTEM_LINK))
 			return SYSTEM_LINK;
 		String environment = ConfigurationHelper.getValueAsString(EnvironmentVariableName.ENVIRONMENT.getValue());
-		//return StringUtils.equalsIgnoreCase(environment, "default") ? "https://siib.dgbf.ci/" : "https://siibtest.dgbf.ci/";
-		return StringUtils.equalsIgnoreCase(environment, "test") ? "https://siibtest.dgbf.ci/" : "https://siib.dgbf.ci/";
+		return StringUtils.equalsIgnoreCase(environment, "default") ? "https://siib.dgbf.ci/" : "https://siibtest.dgbf.ci/";
+		//return StringUtils.equalsIgnoreCase(environment, "test") ? "https://siibtest.dgbf.ci/" : "https://siib.dgbf.ci/";
 	}
 	
 	private static Actor getActor() {
