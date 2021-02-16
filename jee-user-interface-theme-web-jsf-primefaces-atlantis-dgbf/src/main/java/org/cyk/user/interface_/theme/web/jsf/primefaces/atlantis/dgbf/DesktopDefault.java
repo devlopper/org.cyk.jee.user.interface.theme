@@ -90,12 +90,12 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	}
 	
 	public static Tabs buildMenuTabsByIdentifier(String identifier,Class<?> klass) {
-		LogHelper.logInfo("Generating dynamic menu identified by "+identifier, klass);
+		//LogHelper.logInfo("Generating dynamic menu identified by "+identifier, klass);
 		String contextPath = StringHelper.isBlank(CONTEXT_PATH) ? ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_CONTEXT)
 				,ValueHelper.defaultToIfBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_IDENTIFIER),"CONTEXTPATH")) : CONTEXT_PATH;
 		if(!StringUtils.startsWith(contextPath, "/"))
 			contextPath = "/"+contextPath;
-		LogHelper.logInfo("Context path : "+contextPath, klass);
+		//LogHelper.logInfo("Context path : "+contextPath, klass);
 		List<MenuTab> menuTabs = __inject__(MenuGenerator.class).generateServiceMenu(identifier,SessionHelper.getUserName(),contextPath);
 		if(CollectionHelper.isNotEmpty(menuTabs)) {
 			MenuTab menuTab = CollectionHelper.getFirst(menuTabs);
@@ -151,12 +151,12 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 	public static String MENU_OWNER_IDENTIFIER = "SIIBC-MYOWNER";
 	
 	public static void initialize(Class<?> themeManagerQualifierClass,Class<?> userInterfaceEventListenerQualifierClass) {
-		LogHelper.logInfo("Initializing theme...", DesktopDefault.class);		
+		//LogHelper.logInfo("Initializing theme...", DesktopDefault.class);		
 		DependencyInjection.setQualifierClassTo(ValueHelper.defaultToIfNull(themeManagerQualifierClass, DGBF.class), ThemeManager.class);
 		//SYSTEM_LINK = ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL);
 		if(StringHelper.isBlank(ConfigurationHelper.getValueAsString(VariableName.SYSTEM_WEB_HOME_URL))) {
 			String url = ThemeManagerImpl.getSystemLink();
-			LogHelper.logInfo(String.format("System web home url is %s", url), DesktopDefault.class);
+			//LogHelper.logInfo(String.format("System web home url is %s", url), DesktopDefault.class);
 			VariableHelper.write(VariableName.SYSTEM_WEB_HOME_URL, url);
 		}
 		MENU_IDENTIFIER = ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_MENU_IDENTIFIER);
@@ -170,7 +170,7 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 		}else {
 			//SYSTEM_LINK = "#";
 		}
-		LogHelper.logInfo("Theme initialized", DesktopDefault.class);
+		//LogHelper.logInfo("Theme initialized", DesktopDefault.class);
 	}
 	
 	public static void initialize() {
