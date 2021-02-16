@@ -9,7 +9,6 @@ import org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.annotation
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.configuration.ConfigurationHelper;
-import org.cyk.utility.__kernel__.log.LogHelper;
 import org.cyk.utility.__kernel__.properties.Properties;
 import org.cyk.utility.__kernel__.session.SessionHelper;
 import org.cyk.utility.__kernel__.string.StringHelper;
