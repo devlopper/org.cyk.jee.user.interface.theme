@@ -152,6 +152,22 @@
 	min-height: 90% !important;
 }
 
+.cyk-min-height-5-percent {
+	min-height: 5% !important;
+}
+
+.cyk-min-height-10-percent {
+	min-height: 10% !important;
+}
+
+.cyk-min-height-15-percent {
+	min-height: 15% !important;
+}
+
+.cyk-min-height-25-percent {
+	min-height: 25% !important;
+}
+
 .cyk-text-transform-uppercase {
 	text-transform: uppercase !important;
 }
