@@ -208,8 +208,16 @@
     text-align:right !important;
 }
 
+.cyk-text-align-left {
+    text-align:left !important;
+}
+
 .cyk-float-right {
 	float: right;
+}
+
+.cyk-float-left {
+	float: left;
 }
 /* Dash board*/
 
