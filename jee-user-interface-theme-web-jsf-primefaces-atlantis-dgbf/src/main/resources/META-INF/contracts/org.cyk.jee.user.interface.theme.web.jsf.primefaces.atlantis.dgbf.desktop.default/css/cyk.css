@@ -213,11 +213,11 @@
 }
 
 .cyk-float-right {
-	float: right;
+	float: right !important;
 }
 
 .cyk-float-left {
-	float: left;
+	float: left !important;
 }
 /* Dash board*/
 
