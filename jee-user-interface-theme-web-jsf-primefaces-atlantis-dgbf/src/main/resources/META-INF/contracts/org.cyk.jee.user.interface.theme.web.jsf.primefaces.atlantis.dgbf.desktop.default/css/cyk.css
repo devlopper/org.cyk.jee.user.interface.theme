@@ -285,5 +285,6 @@
 }
 
 .cyk-layout-labelvalue-value {
-	
+	font-weight: normal;
+	text-align: left;
 }
