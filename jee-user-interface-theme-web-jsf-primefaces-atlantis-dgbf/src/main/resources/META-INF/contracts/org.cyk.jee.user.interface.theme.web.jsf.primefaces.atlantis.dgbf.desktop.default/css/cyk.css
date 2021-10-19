@@ -173,19 +173,31 @@
 }
 
 .cyk-background-highlight {
-	background: #ff8080!important;
+	background: #ff8080 !important;
 }
 
 .cyk-background-highlight-even {
-	background: #ffb7b7!important;
+	background: #ffb7b7 !important;
 }
 
 .cyk-background-highlight-odd {
-	background: #ff8080!important;
+	background: #ff8080 !important;
 }
 
 .cyk-background-highlight-gray {
-	background: #cbcbc7!important;
+	background: #cbcbc7 !important;
+}
+
+.cyk-background-highlight-green {
+	background: #c8ed77 !important;
+}
+
+.cyk-background-highlight-blue {
+	background: #adf7f6 !important;
+}
+
+.cyk-background-highlight-orange {
+	background: #fcd49f !important;
 }
 
 .cyk-background-gray {
