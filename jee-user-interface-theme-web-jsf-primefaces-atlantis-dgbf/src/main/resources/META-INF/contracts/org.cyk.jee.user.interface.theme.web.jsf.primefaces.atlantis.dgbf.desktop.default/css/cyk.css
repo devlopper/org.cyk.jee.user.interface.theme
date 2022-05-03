@@ -208,6 +208,22 @@
 	background: red !important;
 }
 
+.cyk-background-yellow {
+	background: yellow !important;
+}
+
+.cyk-background-purple {
+	background: purple !important;
+}
+
+.cyk-background-fuchsia {
+	background: fuchsia !important;
+}
+
+.cyk-background-teal {
+	background: teal !important;
+}
+
 .cyk-margin-left-5-px {
 	margin-left : 5px !important;
 }
