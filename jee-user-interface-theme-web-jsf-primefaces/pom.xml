@@ -11,7 +11,7 @@
 
 	<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces</groupId>
 	<artifactId>jee-user-interface-theme-web-jsf-primefaces</artifactId>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	
 	<dependencies>

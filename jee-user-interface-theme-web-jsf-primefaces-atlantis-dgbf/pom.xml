@@ -11,14 +11,14 @@
 
 	<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf</groupId>
 	<artifactId>jee-user-interface-theme-web-jsf-primefaces-atlantis-dgbf</artifactId>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis</groupId>
 			<artifactId>jee-user-interface-theme-web-jsf-primefaces-atlantis</artifactId>
-			<version>0.1.0</version>
+			<version>1.0.0</version>
 		</dependency>
 		
 		<dependency>
