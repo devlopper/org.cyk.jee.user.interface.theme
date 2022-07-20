@@ -26,32 +26,28 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.cyk.jee.utility.client.deployment</groupId>
-			<artifactId>jee-utility-client-deployment</artifactId>
-			<version>0.1.0</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf</groupId>
 			<artifactId>jee-user-interface-theme-web-jsf-primefaces-atlantis-dgbf</artifactId>
-			<version>0.1.0</version>
+			<version>1.0.0</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf</groupId>
-			<artifactId>jee-user-interface-theme-web-jsf-primefaces-atlantis-dgbf</artifactId>
-			<version>0.1.0</version>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>org.cyk.jee.utility.security.keycloak.client</groupId>
 			<artifactId>jee-utility-security-keycloak-client</artifactId>
 			<version>0.1.0</version>
-		</dependency>
-		
+		</dependency>	
 	</dependencies>
 	
 	<profiles>
+		<profile>
+			<id>ivorycoast.blue</id>
+			<properties>
+				<cyk.variable.user.interface.theme.primefaces>atlantis-blue</cyk.variable.user.interface.theme.primefaces>
+				<cyk.variable.user.interface.theme.logo.file.name.prefix>ivorycoastLogo</cyk.variable.user.interface.theme.logo.file.name.prefix>
+				<cyk.variable.user.interface.theme.favicon.file.name.prefix>ivorycoast</cyk.variable.user.interface.theme.favicon.file.name.prefix>
+			</properties>
+		</profile>
+		
 		<profile>
 			<id>ivorycoast.orange</id>
 			<properties>
@@ -65,7 +61,7 @@
 			<id>dgbf</id>
 			<properties>
 				<cyk.variable.user.interface.theme.class.name>org.cyk.user.interface_.theme.web.jsf.primefaces.atlantis.dgbf.DesktopDefault</cyk.variable.user.interface.theme.class.name>
-				<cyk.variable.user.interface.theme.jsf.contract>org.cyk.jee.user.interface.theme.web.jsf.primefaces.atlantis.dgbf.desktop.default</cyk.variable.user.interface.theme.jsf.contract>
+				<cyk.variable.user.interface.theme.jsf.contract>org.cyk.primefaces.theme.atlantis.dgbf.default</cyk.variable.user.interface.theme.jsf.contract>
 			</properties>
 		</profile>
 	</profiles>

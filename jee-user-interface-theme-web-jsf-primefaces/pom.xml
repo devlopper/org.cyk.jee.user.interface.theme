@@ -13,12 +13,12 @@
 	<artifactId>jee-user-interface-theme-web-jsf-primefaces</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	
+
 	<dependencies>
 		<dependency>
-			<groupId>org.cyk.jee.utility.client.controller.web.jsf.primefaces</groupId>
-			<artifactId>jee-utility-client-controller-web-jsf-primefaces</artifactId>
-			<version>0.1.0</version>
+			<groupId>org.cyk.extension.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 </project>

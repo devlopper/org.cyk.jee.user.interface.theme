@@ -79,8 +79,10 @@ public class DesktopDefault extends org.cyk.user.interface_.theme.web.jsf.primef
 			super.____buildMenu____(menuMapKey);
 			if(Boolean.TRUE.equals(IS_SHOW_USER_MENU)) {
 				topMenu = new DefaultMenuModel();
-				DefaultMenuItem menuItem = new DefaultMenuItem("Se déconnecter","fa fa-log-out");
-				topMenu.addElement(menuItem);
+				DefaultMenuItem menuItem = new DefaultMenuItem();
+				menuItem.setValue("Se déconnecter");
+				menuItem.setIcon("fa fa-log-out");
+				topMenu.getElements().add(menuItem);
 				menuItem.setCommand("#{userInterfaceController.logout}");
 				menuItem.setUrl(null);
 				menuItem.setHref(null);

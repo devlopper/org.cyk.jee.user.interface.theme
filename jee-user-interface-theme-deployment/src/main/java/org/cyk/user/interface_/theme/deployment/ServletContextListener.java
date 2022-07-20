@@ -12,7 +12,7 @@ import org.cyk.utility.__kernel__.variable.VariableHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.cyk.utility.client.controller.component.menu.MenuBuilderMapInstantiator;
 import org.cyk.utility.client.controller.component.theme.ThemeColorGetter;
-import org.cyk.utility.client.deployment.AbstractServletContextListener;
+import org.cyk.utility.client.controller.web.jsf.primefaces.AbstractServletContextListener;
 
 import ci.gouv.dgbf.utility.Helper;
 

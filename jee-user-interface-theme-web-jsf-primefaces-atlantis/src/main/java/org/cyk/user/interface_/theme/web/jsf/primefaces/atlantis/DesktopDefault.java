@@ -45,21 +45,26 @@ public class DesktopDefault extends AbstractThemeImpl implements Serializable {
 		Theme theme = super.build();
 		Object request = getRequest();
 		
-		__addTagLinkStyleSheet__("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+		//__addTagLinkStyleSheet__("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 		
 		__addTagScriptResource__(request, "fr_FR.js","js");
-		__addTagScriptResource__(request, "nanoscroller.js","js");
+		//__addTagScriptResource__(request, "nanoscroller.js","js");
 		__addTagScriptResource__(request, "layout.js","js");
-		__addTagScriptResource__(request, "common.js","js");
+		__addTagScriptResource__(request, "prism.js","js");
+		//__addTagScriptResource__(request, "common.js","js");
 		
-		__addTagLinkResourceStyleSheet__(request, "nanoscroller.css","css");
-		__addTagLinkResourceStyleSheet__(request, "animate.css","css");
+
+		//__addTagLinkResourceStyleSheet__(request, "nanoscroller.css","css");
+		//__addTagLinkResourceStyleSheet__(request, "animate.css","css");
 		__addTagLinkResourceStyleSheet__(request, "main.css","css");
-		__addTagLinkResourceStyleSheet__(request, "primeflex.css","primeflex");
+		//__addTagLinkResourceStyleSheet__(request, "primeflex.css","primeflex");
+		__addTagLinkResourceStyleSheet__(request, "primeicons.css","css");
+		__addTagLinkResourceStyleSheet__(request, "primeflex.min.css","css");
 		
 		if(color == null)
 			color = StringUtils.substringAfter(ConfigurationHelper.getValueAsString(VariableName.USER_INTERFACE_THEME_PRIMEFACES), "atlantis-");
 		__addTagLinkResourceStyleSheet__(request, "layout-"+color+".css","css");
+		__addTagLinkResourceStyleSheet__(request, "theme.css","primefaces-atlantis-"+color);
 		
 		Tag tag = __inject__(TagForm.class);
 		tag.setIdentifier(__inject__(ComponentHelper.class).getGlobalFormComponentIdentifier());
