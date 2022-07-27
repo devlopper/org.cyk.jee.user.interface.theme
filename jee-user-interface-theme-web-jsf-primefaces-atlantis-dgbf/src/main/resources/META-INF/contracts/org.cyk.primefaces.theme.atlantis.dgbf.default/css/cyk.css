@@ -74,6 +74,10 @@
 .ui-autocomplete-input {
 	width: 100% !important;
 }
+/*
+.ui-autocomplete-dropdown {
+	width: 10% !important;
+}*/
 
 /* Data Table */
 

@@ -2,16 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"   
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:cyk="http://primefaces.jsf.web.utility.cyk.org">
+      xmlns:p="http://primefaces.org/ui">
 	
-	<cyk:page value="#{inputIndexPage}">
-		<ui:define name="centerCenter">
-			<p:autoComplete dropdown="true"/>
+    <h:head>
+        <title>Playground</title>
+    </h:head>
+    <h:body>
+    	<h:form>
+    	   <p:autoComplete dropdown="true"/>
 			<div class="ui-g">
 				<div class="ui-g-12">
 					<div class="ui-g-3">
@@ -34,6 +34,6 @@
 					</div>
 				</div>
 			</div>
-		</ui:define>
-	</cyk:page>
+    	</h:form>
+    </h:body>
 </html>
