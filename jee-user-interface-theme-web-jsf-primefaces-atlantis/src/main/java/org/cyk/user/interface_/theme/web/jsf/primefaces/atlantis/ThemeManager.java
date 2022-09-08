@@ -98,7 +98,7 @@ public interface ThemeManager {
 		}
 		
 		protected String __getApplicationOutcome__(AbstractPageContainerManagedImpl page) {
-			return "indexView";
+			return (String) INDEX_VIEW_OUTCOME.get(); //"indexView";
 		}
 		
 		@Override
@@ -170,4 +170,5 @@ public interface ThemeManager {
 	}
 	
 	Value INSTANCE = new Value();
+	Value INDEX_VIEW_OUTCOME = new Value().set("indexView");
 }
